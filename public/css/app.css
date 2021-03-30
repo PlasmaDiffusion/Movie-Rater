@@ -1,0 +1,132 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+header {
+  font-size: 2rem;
+  background-color: #380180;
+  color: white;
+  padding: 2rem;
+}
+
+footer {
+  background-color: #380180;
+  color: white;
+  padding: 4rem;
+  margin-top: 5%;
+}
+footer a {
+  color: white;
+}
+
+.flex-container {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  overflow: auto;
+}
+
+.listedMovie {
+  background-color: #21004d;
+  border-radius: 12px;
+  margin: auto;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  display: inline-block;
+  margin-bottom: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 4px;
+}
+.listedMovie p {
+  color: white;
+}
+.listedMovie .movieName {
+  height: 32px;
+}
+.listedMovie img {
+  border-radius: 8px;
+}
+
+.text-small {
+  font-size: 11pt;
+}
+
+.text-smaller {
+  font-size: 10pt;
+}
+
+.movieDetails {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+.movieDetails h2,
+.movieDetails button,
+.movieDetails p {
+  opacity: 1;
+}
+
+/* Scrollbar*/
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media screen and (max-width: 480px) {
+  .listedMovie {
+    width: 128px;
+  }
+  .listedMovie img {
+    width: 128px;
+    height: 128px;
+  }
+  .listedMovie p {
+    overflow-wrap: normal;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    overflow: visible;
+    text-overflow: ellipsis;
+  }
+  .listedMovie .movieName {
+    height: 48px;
+  }
+
+  .text-small {
+    font-size: 10pt;
+  }
+
+  .text-smaller {
+    font-size: 8.8pt;
+  }
+}
