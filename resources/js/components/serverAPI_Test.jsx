@@ -14,7 +14,7 @@ function ServerAPI_Test(props){
 
 
         return(<React.Fragment>
-            <h1>Movies</h1>
+            <h1>Reviewed Movies: {movieArray.length} </h1>
         {movieArray.map((movie, index) => (
             <div>
                 <h1> {movie.title} </h1>

@@ -65,19 +65,45 @@ footer a {
   font-size: 10pt;
 }
 
+.movieBG,
 .movieDetails {
   position: fixed;
+  color: white;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: black;
-  opacity: 0.5;
+  background-color: #21004d;
 }
+.movieBG h2,
+.movieBG button,
+.movieBG p,
 .movieDetails h2,
 .movieDetails button,
 .movieDetails p {
   opacity: 1;
+}
+
+.movieDetails {
+  position: relative;
+  margin: auto;
+  margin-top: 1%;
+  width: 50%;
+  height: 70%;
+  background-color: #380180;
+}
+
+.reviewList {
+  height: 30%;
+  width: 60%;
+  margin-left: 20%;
+}
+.reviewList p {
+  text-align: left;
+}
+
+.scroll {
+  overflow: auto;
 }
 
 /* Scrollbar*/

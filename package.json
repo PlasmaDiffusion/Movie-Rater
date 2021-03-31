@@ -27,6 +27,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "react-hooks-visible": "^1.1.1",
         "react-router-dom": "^5.2.0"
     }
 }

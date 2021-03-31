@@ -23,7 +23,7 @@ function MovieList(props){
     return (<div> <h2>{props.category}</h2>
     <div className="flex-container" >
         {movieArray.map((movie, index) => (
-          <MovieCard movie={movie} id={index} />
+          <MovieCard movie={movie} id={index} key={props.category + index} />
         ))}
     </div>
     </div>);
