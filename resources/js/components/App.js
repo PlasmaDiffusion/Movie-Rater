@@ -4,6 +4,17 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ServerAPI_Test from "./serverAPI_Test";
 import MovieList from "./movieList";
 
+//Redux imports
+import { createStore } from "redux";
+import allReducers from "./reducers";
+import { Provider } from "react-redux";
+import ReduxTest from "./reduxTest";
+
+const store = createStore(
+    allReducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 class App extends Component {
     render() {
         return (
@@ -17,6 +28,7 @@ class App extends Component {
                 </div>
                 <div>
                     <ServerAPI_Test />
+                    <ReduxTest />
                 </div>
                 {/*movieArray.map((item, index) => (
           <div>
@@ -32,4 +44,9 @@ class App extends Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById("app")
+);
