@@ -2077,7 +2077,8 @@ react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "increment": () => (/* binding */ increment),
-/* harmony export */   "decrement": () => (/* binding */ decrement)
+/* harmony export */   "decrement": () => (/* binding */ decrement),
+/* harmony export */   "setMovieId": () => (/* binding */ setMovieId)
 /* harmony export */ });
 var increment = function increment(number) {
   return {
@@ -2089,6 +2090,12 @@ var decrement = function decrement(number) {
   return {
     type: "DECREMENT",
     payload: number
+  };
+};
+var setMovieId = function setMovieId(id) {
+  return {
+    type: "SET",
+    payload: id
   };
 };
 
@@ -2200,10 +2207,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_hooks_visible__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-hooks-visible */ "./node_modules/react-hooks-visible/lib/index.min.js");
 /* harmony import */ var react_hooks_visible__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_hooks_visible__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _reviews_reviewList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reviews/reviewList */ "./resources/js/components/reviews/reviewList.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions */ "./resources/js/components/actions/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _reviews_reviewList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./reviews/reviewList */ "./resources/js/components/reviews/reviewList.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2219,6 +2228,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
  //A window showing movie information, and reviews. It also will load in stuff from the database.
 
 
@@ -2229,34 +2240,40 @@ function MovieDetails(props) {
   var _useVisible = (0,react_hooks_visible__WEBPACK_IMPORTED_MODULE_1__.useVisible)(),
       _useVisible2 = _slicedToArray(_useVisible, 2),
       targetRef = _useVisible2[0],
-      visible = _useVisible2[1]; //Debug API data on the movie here.
+      visible = _useVisible2[1]; //Redux state
 
+
+  var currentMovieId = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
+    return state.movieId;
+  });
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)(); //Debug API data on the movie here.
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (visible) {
       console.log(props.movie);
+      dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_3__.setMovieId)(props.movie.id));
     }
   }, [visible]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     ref: targetRef,
     className: "movieBG scroll",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "movieDetails",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
         onClick: props.closeOnClick,
         children: " X "
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
         children: props.movie.title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
         children: props.movie.release_date
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
         src: "https://image.tmdb.org/t/p/original/" + props.movie.poster_path,
         width: 167,
         height: 250
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
         children: props.movie.overview
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_reviews_reviewList__WEBPACK_IMPORTED_MODULE_3__.default, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_reviews_reviewList__WEBPACK_IMPORTED_MODULE_5__.default, {
       movieTitle: props.movie.title
     })]
   });
@@ -2379,13 +2396,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _counter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./counter */ "./resources/js/components/reducers/counter.js");
 /* harmony import */ var _isLogged__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./isLogged */ "./resources/js/components/reducers/isLogged.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _movieId__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./movieId */ "./resources/js/components/reducers/movieId.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 
 
 
-var allReducers = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+
+var allReducers = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
   counter: _counter__WEBPACK_IMPORTED_MODULE_0__.default,
-  isLogged: _isLogged__WEBPACK_IMPORTED_MODULE_1__.default
+  isLogged: _isLogged__WEBPACK_IMPORTED_MODULE_1__.default,
+  movieId: _movieId__WEBPACK_IMPORTED_MODULE_2__.default
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (allReducers);
 
@@ -2416,6 +2436,35 @@ var loggedReducer = function loggedReducer() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loggedReducer);
+
+/***/ }),
+
+/***/ "./resources/js/components/reducers/movieId.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/reducers/movieId.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//Basic that
+var movieIdReducer = function movieIdReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case "SET":
+      return action.payload;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (movieIdReducer);
 
 /***/ }),
 

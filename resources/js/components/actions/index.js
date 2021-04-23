@@ -5,3 +5,7 @@ export const increment = (number) => {
 export const decrement = (number) => {
     return { type: "DECREMENT", payload: number };
 };
+
+export const setMovieId = (id) => {
+    return { type: "SET", payload: id };
+};

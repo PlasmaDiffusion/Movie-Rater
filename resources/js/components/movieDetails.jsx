@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useVisible } from 'react-hooks-visible'
 
+import {useSelector, useDispatch} from 'react-redux';
+import {setMovieId} from './actions';
+
 import axios from 'axios';
 import ReviewList from './reviews/reviewList';
 
@@ -10,12 +13,17 @@ function MovieDetails(props){
   //Check when this window is visible.
   const [targetRef, visible] = useVisible();
 
+  //Redux state
+  const currentMovieId = useSelector(state => state.movieId);
+  const dispatch = useDispatch();
+
   //Debug API data on the movie here.
   useEffect(() => {
 
     if (visible)
     {
       console.log(props.movie);
+      dispatch(setMovieId(props.movie.id));
     }
 
   }, [visible])
