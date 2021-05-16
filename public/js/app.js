@@ -2252,6 +2252,7 @@ function MovieDetails(props) {
     if (visible) {
       console.log(props.movie);
       dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_3__.setMovieId)(props.movie.id));
+      console.log(getState());
     }
   }, [visible]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {

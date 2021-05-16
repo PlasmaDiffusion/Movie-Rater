@@ -24,6 +24,7 @@ function MovieDetails(props){
     {
       console.log(props.movie);
       dispatch(setMovieId(props.movie.id));
+      console.log(getState());
     }
 
   }, [visible])
