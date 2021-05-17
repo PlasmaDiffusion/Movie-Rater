@@ -21,12 +21,16 @@ function ReviewList(props)
 
     //Try to load in reviews from the database once this component is visible.
     if (visible)
-    {
-      //axios stuff....
-      setReviews([
-          "","","","",
-      ])
-      setReviewsLoaded(true);
+    {           
+      //axios.get(`api/movie/${props.movieTitle}`)
+
+
+      axios.get(`api/movie/${props.movieTitle}`)
+        .then(res => {
+          //setMovieArray(res.data.items);
+            console.log("Movies in DB", res.data);
+            setReviewsLoaded(true);
+        })
     }
 
   }, [visible])
@@ -44,8 +48,8 @@ function ReviewList(props)
 
          <p>{ //Mention if there aren't any reviews for this movie yet.
          reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : "Checking for reviews..."}</p>
-
-         <ReviewForm />
+        <p>{props.movieTitle}</p>
+         <ReviewForm movieTitle={props.movieTitle} />
          </div>
 
      </div>

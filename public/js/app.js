@@ -2546,13 +2546,21 @@ function ReviewForm(props) {
   }*/
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "reviewForm",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
-      children: "Submit A Review"
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h1", {
+      children: ["Submit A Review for ", props.moveTitle]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
       method: "POST",
       action: "api/review",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         name: "reviewerName"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+        children: "Reviewing "
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        readOnly: true,
+        type: "text",
+        id: "movie",
+        name: "movieName",
+        value: props.movieTitle
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
           type: "radio",
@@ -2665,9 +2673,12 @@ function ReviewList(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     //Try to load in reviews from the database once this component is visible.
     if (visible) {
-      //axios stuff....
-      setReviews(["", "", "", ""]);
-      setReviewsLoaded(true);
+      //axios.get(`api/movie/${props.movieTitle}`)
+      axios.get("api/movie/".concat(props.movieTitle)).then(function (res) {
+        //setMovieArray(res.data.items);
+        console.log("Movies in DB", res.data);
+        setReviewsLoaded(true);
+      });
     }
   }, [visible]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -2682,7 +2693,11 @@ function ReviewList(props) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: //Mention if there aren't any reviews for this movie yet.
         reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : "Checking for reviews..."
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_reviewForm__WEBPACK_IMPORTED_MODULE_3__.default, {})]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: props.movieTitle
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_reviewForm__WEBPACK_IMPORTED_MODULE_3__.default, {
+        movieTitle: props.movieTitle
+      })]
     })
   });
 }

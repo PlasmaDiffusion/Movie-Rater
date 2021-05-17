@@ -27,5 +27,5 @@ use App\Http\Controllers\ReviewController;
 Route::get('movies', [MovieController::class, 'index']);
 Route::post('movies', [MovieController::class, 'store']);
 Route::get('movies/{id}', [MovieController::class, 'show']);
-
+Route::get('movie/{name}', [MovieController::class, 'findOrCreateByName']);
 Route::post('review', [ReviewController::class, 'store']);

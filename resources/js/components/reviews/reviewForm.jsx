@@ -27,11 +27,13 @@ function ReviewForm(props)
  return(
      <div className="reviewForm">
         
-         <h1>Submit A Review</h1>
+         <h1>Submit A Review for {props.moveTitle}</h1>
 
          <form method="POST" action="api/review" >
             
-            <input name="reviewerName"></input>
+            <input name="reviewerName"></input><br></br>
+            <label>Reviewing </label>
+            <input readOnly = {true} type="text" id="movie" name="movieName" value={props.movieTitle} ></input>
 
             <div>
 

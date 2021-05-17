@@ -17,6 +17,7 @@ class MovieController extends Controller
         return $movies->toJson();
     }
 
+
     //Add a yet to be rated movie to the database. The "average" score will but whatever this first rating is.
     public function store(Request $request)
     {
@@ -40,12 +41,18 @@ class MovieController extends Controller
         return $project->toJson();
     }
 
-    public function showByName($title)
+    public function findOrCreateByName($title)
     {
         $project = Movie::where('title', $title)
             ->with(['reviews'])->firstOrFail();
 
-        //TODO: Can't find it? Create a new movie with this name here.
+        //Can't find it? Create a new movie with this name here.
+        if (!$project) {
+            $movie = Movie::create([
+                'name' => $title,
+                'averageScore' => 0,
+            ]);
+        }
 
         return $project->toJson();
     }
