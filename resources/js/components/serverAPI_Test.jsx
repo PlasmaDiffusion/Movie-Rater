@@ -6,10 +6,10 @@ function ServerAPI_Test(props){
     var [movieArray, setMovieArray] = useState([]);
 
     useEffect(() => {
-        axios.get("/api/movies")
+        axios.get("api/movies")
         .then(res => {
           //setMovieArray(res.data.items);
-            console.log(res.data);
+            console.log("Movies in DB", res.data);
         })}, []);
 
 

@@ -45,6 +45,8 @@ class MovieController extends Controller
         $project = Movie::where('title', $title)
             ->with(['reviews'])->firstOrFail();
 
+        //TODO: Can't find it? Create a new movie with this name here.
+
         return $project->toJson();
     }
 
