@@ -2526,27 +2526,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
- //Get all reviews for the particular movie, and list them. Also have a form to submit a review at the bottom.
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+ //The form to submit a review at the bottom of the page.
 
 
 
 
 function ReviewForm(props) {
-  /*function submitReview(data)
-  {
-      alert(data.comment);
-      console.log(data);
-        axios.post("api/review", data)
-      .then(res => {
-          console.log(res.data);
-      })
-        
-  
-  }*/
-  function onPosted() {
-    window.location.href = "";
-    window.location.reload();
+  //States the froms would change
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      reviewerName = _useState2[0],
+      setName = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
+      _useState4 = _slicedToArray(_useState3, 2),
+      score = _useState4[0],
+      setScore = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      comment = _useState6[0],
+      setComment = _useState6[1];
+
+  function submitReview() {
+    /*let data = {movie_id:7,
+    reviewerName:"Ralph",
+    score:"2",
+    comment: "Villain was weird"}*/
+    var data = {
+      reviewerName: reviewerName,
+      movieName: props.movieTitle,
+      score: score,
+      comment: comment
+    };
+    console.log(data);
+    alert(data);
+    axios__WEBPACK_IMPORTED_MODULE_1___default().post("api/review", data).then(function (res) {
+      console.log(res.data);
+      alert("Submitted");
+    });
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -2556,9 +2587,11 @@ function ReviewForm(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
       method: "POST",
       action: "api/review",
-      onSubmit: onPosted,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-        name: "reviewerName"
+        name: "reviewerName",
+        onChange: function onChange(e) {
+          return setName(e.value);
+        }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
         children: "Reviewing "
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
@@ -2572,7 +2605,8 @@ function ReviewForm(props) {
           type: "radio",
           name: "score",
           id: "score1",
-          value: "1"
+          value: "1",
+          onClick: setScore(1)
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
           children: "1"
@@ -2580,7 +2614,8 @@ function ReviewForm(props) {
           type: "radio",
           name: "score",
           id: "score2",
-          value: "2"
+          value: "2",
+          onClick: setScore(2)
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
           children: "2"
@@ -2588,7 +2623,8 @@ function ReviewForm(props) {
           type: "radio",
           name: "score",
           id: "score3",
-          value: "3"
+          value: "3",
+          onClick: setScore(3)
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
           children: "3"
@@ -2596,7 +2632,8 @@ function ReviewForm(props) {
           type: "radio",
           name: "score",
           id: "score4",
-          value: "4"
+          value: "4",
+          onClick: setScore(4)
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
           children: "4"
@@ -2604,13 +2641,17 @@ function ReviewForm(props) {
           type: "radio",
           name: "score",
           id: "score5",
-          value: "5"
+          value: "5",
+          onClick: setScore(5)
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
           children: "5"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
-        name: "comment"
+        name: "comment",
+        onChange: function onChange(e) {
+          return setComment(e.value);
+        }
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "submit"
       })]
