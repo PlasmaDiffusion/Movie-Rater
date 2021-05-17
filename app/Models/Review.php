@@ -10,5 +10,5 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['reviewerName', 'score', 'comment'];
+    protected $fillable = ['movie_id', 'reviewerName', 'score', 'comment'];
 }

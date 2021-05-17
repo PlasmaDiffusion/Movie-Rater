@@ -10,6 +10,8 @@ function ServerAPI_Test(props){
         .then(res => {
           //setMovieArray(res.data.items);
             console.log("Movies in DB", res.data);
+            console.log("Movies in DB", res.data[0]);
+
         })}, []);
 
 

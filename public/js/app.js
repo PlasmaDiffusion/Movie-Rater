@@ -2544,6 +2544,11 @@ function ReviewForm(props) {
         
   
   }*/
+  function onPosted() {
+    window.location.href = "";
+    window.location.reload();
+  }
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "reviewForm",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h1", {
@@ -2551,6 +2556,7 @@ function ReviewForm(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
       method: "POST",
       action: "api/review",
+      onSubmit: onPosted,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         name: "reviewerName"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -2672,11 +2678,11 @@ function ReviewList(props) {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     //Try to load in reviews from the database once this component is visible.
-    if (visible) {
+    if (visible && !reviewsLoaded) {
       //axios.get(`api/movie/${props.movieTitle}`)
       axios.get("api/movie/".concat(props.movieTitle)).then(function (res) {
         //setMovieArray(res.data.items);
-        console.log("Movies in DB", res.data);
+        console.log("Loading movie data: ", res.data);
         setReviewsLoaded(true);
       });
     }
@@ -2748,6 +2754,7 @@ function ServerAPI_Test(props) {
     axios__WEBPACK_IMPORTED_MODULE_0___default().get("api/movies").then(function (res) {
       //setMovieArray(res.data.items);
       console.log("Movies in DB", res.data);
+      console.log("Movies in DB", res.data[0]);
     });
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {

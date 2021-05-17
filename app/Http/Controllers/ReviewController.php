@@ -19,18 +19,20 @@ class ReviewController extends Controller
 
         //Find a movie ID with the given name
         $mc = new MovieController();
-        $movie = $mc->findOrCreateByName($validatedData['movieName']);
+        $movie = $mc->findOrCreateByName($validatedData['movieName'], false);
 
-
+        echo $movie;
+        echo $movie['id'];
 
         //Post the review
-        $task = Review::create([
+        $review = Review::create([
+            'movie_id' => $movie['id'],
             'reviewerName' => $validatedData['reviewerName'],
             'score' => $validatedData['score'],
             'comment' => $request->comment,
-            'movie_id' => $movie->id,
         ]);
 
-        return $task->toJson();
+
+        return $review->toJson();
     }
 }

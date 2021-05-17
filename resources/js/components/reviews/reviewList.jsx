@@ -20,17 +20,17 @@ function ReviewList(props)
   useEffect(() => {
 
     //Try to load in reviews from the database once this component is visible.
-    if (visible)
+    if (visible && !reviewsLoaded)
     {           
       //axios.get(`api/movie/${props.movieTitle}`)
 
-
       axios.get(`api/movie/${props.movieTitle}`)
-        .then(res => {
-          //setMovieArray(res.data.items);
-            console.log("Movies in DB", res.data);
-            setReviewsLoaded(true);
-        })
+      .then(res => {
+        //setMovieArray(res.data.items);
+          console.log("Loading movie data: ", res.data);
+          setReviewsLoaded(true);
+      })
+
     }
 
   }, [visible])

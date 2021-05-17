@@ -34,33 +34,47 @@ class MovieController extends Controller
         return response()->json('Movie added to review list!');
     }
 
-    public function show($id)
+    /*public function findOrCreateByName($id)
     {
-        $project = Movie::with(['reviews'])->find($id);
+        $movie = Movie::with(['reviews'])->find($id);
 
-        return $project->toJson();
-    }
+        return $movie->toJson();
+    }*/
 
-    public function findOrCreateByName($title)
+    public function findOrCreateByName($title, $json = true)
     {
-        $project = Movie::where('title', $title)
-            ->with(['reviews'])->firstOrFail();
+        echo $title;
+
+        //$movie = Movie::where('title', $title)->get();
+        $movie = Movie::where('title', $title)
+            ->with(['reviews'])->first();
+
+        echo " Movie gotten: ", $movie, " ";
 
         //Can't find it? Create a new movie with this name here.
-        if (!$project) {
+        if (!$movie) {
+
+            echo "Creating ", $movie;
+
+
             $movie = Movie::create([
-                'name' => $title,
+                'title' => $title,
                 'averageScore' => 0,
             ]);
         }
 
-        return $project->toJson();
+
+
+        if ($json)
+            return $movie->toJson();
+        else
+            return $movie;
     }
 
     //public function addReview()
 
 
-    /*public function showUserReviews($username)
+    /*public function findOrCreateByNameUserReviews($username)
     {
         $movies = Movie::with(['reviews' => function ($query) {
             $query->where('reviewerName', $username);

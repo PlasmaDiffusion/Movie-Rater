@@ -21,7 +21,11 @@ function ReviewForm(props)
     }*/
 
 
-
+    function onPosted()
+    {
+        window.location.href="";
+        window.location.reload();
+    }
 
 
  return(
@@ -29,7 +33,7 @@ function ReviewForm(props)
         
          <h1>Submit A Review for {props.moveTitle}</h1>
 
-         <form method="POST" action="api/review" >
+         <form method="POST" action="api/review" onSubmit={onPosted}>
             
             <input name="reviewerName"></input><br></br>
             <label>Reviewing </label>
