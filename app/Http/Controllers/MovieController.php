@@ -34,33 +34,27 @@ class MovieController extends Controller
         return response()->json('Movie added to review list!');
     }
 
-    /*public function findOrCreateByName($id)
-    {
-        $movie = Movie::with(['reviews'])->find($id);
-
-        return $movie->toJson();
-    }*/
 
     public function findOrCreateByName($title, $json = true)
     {
-        echo $title;
 
         //$movie = Movie::where('title', $title)->get();
         $movie = Movie::where('title', $title)
             ->with(['reviews'])->first();
 
-        echo " Movie gotten: ", $movie, " ";
 
         //Can't find it? Create a new movie with this name here.
         if (!$movie) {
 
-            echo "Creating ", $movie;
 
 
             $movie = Movie::create([
                 'title' => $title,
                 'averageScore' => 0,
             ]);
+        } else //Calculate average score when getting all reviews.
+        {
+            $movie = $this->calculateAverageScore($movie);
         }
 
 
@@ -71,17 +65,30 @@ class MovieController extends Controller
             return $movie;
     }
 
-    //public function addReview()
-
-
-    /*public function findOrCreateByNameUserReviews($username)
+    private function calculateAverageScore($movie)
     {
-        $movies = Movie::with(['reviews' => function ($query) {
-            $query->where('reviewerName', $username);
-        }])->get();
 
-        return $movies->toJson();
-    }*/
+        //Tally up all review scores
+        $totalScore = 0;
+
+        foreach ($movie->reviews as  $review) {
+            $totalScore += $review->score;
+        }
+
+        //Calculate the average
+        $aveScore = $totalScore / count($movie->reviews);
+
+        //Update the average score, if not up to date
+        if ($movie->averageScore != $aveScore) {
+            $updatedMovie = Movie::where('title', $movie->title)
+                ->update(['averageScore' => $aveScore]);
+
+            return $updatedMovie;
+        }
+
+        //Return same movie if already up to date with average score.
+        return $movie;
+    }
 }
 
 

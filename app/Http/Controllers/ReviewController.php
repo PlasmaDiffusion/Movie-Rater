@@ -10,6 +10,7 @@ use App\Http\Controllers\MovieController;
 
 class ReviewController extends Controller
 {
+
     public function store(Request $request)
     {
         //Make sure score and name are in
@@ -31,6 +32,10 @@ class ReviewController extends Controller
             'score' => $validatedData['score'],
             'comment' => $request->comment,
         ]);
+
+
+        //Update new average
+        $mc->calculateAverageScore();
 
 
         return $review->toJson();

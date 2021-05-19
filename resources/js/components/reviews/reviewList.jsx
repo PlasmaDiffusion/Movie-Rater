@@ -15,6 +15,7 @@ function ReviewList(props)
   const [targetRef, visible] = useVisible();
 
   const [reviews, setReviews] = useState([]);
+  const [aveScore, setAveScore] = useState(0);
   const [reviewsLoaded, setReviewsLoaded] = useState(false);
 
   useEffect(() => {
@@ -27,8 +28,15 @@ function ReviewList(props)
       axios.get(`api/movie/${props.movieTitle}`)
       .then(res => {
         //setMovieArray(res.data.items);
-          console.log("Loading movie data: ", res.data);
+          console.log(res.data);
+          if (res.data.reviews)
+          {
+          console.log("Reviews: ", res.data.reviews);
+          setReviews(res.data.reviews);
+          setAveScore(res.data.averageScore);
+          }
           setReviewsLoaded(true);
+
       })
 
     }
@@ -38,13 +46,15 @@ function ReviewList(props)
 
  return(
      <div ref={targetRef}>
+        <h2>Average Score: {aveScore}</h2>
          <div class="reviewList">
-         { //Display all reviews
+         { //Display all 
+         reviews ? (
          reviews.map((review, index) => (
 
             <Review review={review} key={props.movieTitle + "review" + index}/>
 
-         ))}
+         ))) : ""}
 
          <p>{ //Mention if there aren't any reviews for this movie yet.
          reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : "Checking for reviews..."}</p>

@@ -2495,14 +2495,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 function Review(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "review",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
-      children: "Review"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-      children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h3", {
+      style: {
+        textAlign: "left"
+      },
+      children: ["Review by ", props.review.reviewerName]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
+      children: [" ", props.review.score, "/5 "]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
+      children: [" ", props.review.comment, " "]
     })]
   });
 }
@@ -2559,7 +2563,8 @@ function ReviewForm(props) {
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
       _useState6 = _slicedToArray(_useState5, 2),
       comment = _useState6[0],
-      setComment = _useState6[1];
+      setComment = _useState6[1]; //OnChange event would be this, but laravel doesn't seem to like the post request axios gives :/
+
 
   function submitReview() {
     /*let data = {movie_id:7,
@@ -2582,19 +2587,21 @@ function ReviewForm(props) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "reviewForm",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h1", {
-      children: ["Submit A Review for ", props.moveTitle]
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+      children: "Submit A Review"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
       method: "POST",
       action: "api/review",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+        children: "Username "
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         name: "reviewerName",
         onChange: function onChange(e) {
           return setName(e.value);
         }
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
         children: "Reviewing "
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         readOnly: true,
         type: "text",
         id: "movie",
@@ -2605,8 +2612,7 @@ function ReviewForm(props) {
           type: "radio",
           name: "score",
           id: "score1",
-          value: "1",
-          onClick: setScore(1)
+          value: "1"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
           children: "1"
@@ -2614,8 +2620,7 @@ function ReviewForm(props) {
           type: "radio",
           name: "score",
           id: "score2",
-          value: "2",
-          onClick: setScore(2)
+          value: "2"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
           children: "2"
@@ -2623,8 +2628,7 @@ function ReviewForm(props) {
           type: "radio",
           name: "score",
           id: "score3",
-          value: "3",
-          onClick: setScore(3)
+          value: "3"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
           children: "3"
@@ -2632,8 +2636,7 @@ function ReviewForm(props) {
           type: "radio",
           name: "score",
           id: "score4",
-          value: "4",
-          onClick: setScore(4)
+          value: "4"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
           children: "4"
@@ -2641,23 +2644,41 @@ function ReviewForm(props) {
           type: "radio",
           name: "score",
           id: "score5",
-          value: "5",
-          onClick: setScore(5)
+          value: "5"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
           children: "5"
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
-        name: "comment",
-        onChange: function onChange(e) {
-          return setComment(e.value);
-        }
+        name: "comment"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "submit"
       })]
     })]
   });
 }
+/* With onChange states
+<input name="reviewerName" onChange={(e) => setName(e.value)}></input><br></br>
+<label>Reviewing </label>
+<input readOnly = {true} type="text" id="movie" name="movieName" value={props.movieTitle} ></input>
+  <div>
+      <input type="radio" name="score" id="score1" value="1" onClick={setScore(1)}></input>
+    <label className="star">1</label>
+    <input type="radio" name="score" id="score2" value="2" onClick={setScore(2)}></input>
+    <label className="star">2</label>
+    <input type="radio" name="score" id="score3" value="3" onClick={setScore(3)}></input>
+    <label className="star">3</label>
+    <input type="radio" name="score" id="score4" value="4" onClick={setScore(4)}></input>
+    <label className="star">4</label>
+    <input type="radio" name="score" id="score5" value="5" onClick={setScore(5)}></input>
+    <label className="star">5</label>
+</div>
+  <br></br>
+  <textarea name="comment" onChange={(e) => setComment(e.value)}></textarea>
+
+<br></br>
+*/
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ReviewForm);
 
@@ -2712,10 +2733,15 @@ function ReviewList(props) {
       reviews = _useState2[0],
       setReviews = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
       _useState4 = _slicedToArray(_useState3, 2),
-      reviewsLoaded = _useState4[0],
-      setReviewsLoaded = _useState4[1];
+      aveScore = _useState4[0],
+      setAveScore = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      reviewsLoaded = _useState6[0],
+      setReviewsLoaded = _useState6[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     //Try to load in reviews from the database once this component is visible.
@@ -2723,21 +2749,30 @@ function ReviewList(props) {
       //axios.get(`api/movie/${props.movieTitle}`)
       axios.get("api/movie/".concat(props.movieTitle)).then(function (res) {
         //setMovieArray(res.data.items);
-        console.log("Loading movie data: ", res.data);
+        console.log(res.data);
+
+        if (res.data.reviews) {
+          console.log("Reviews: ", res.data.reviews);
+          setReviews(res.data.reviews);
+          setAveScore(res.data.averageScore);
+        }
+
         setReviewsLoaded(true);
       });
     }
   }, [visible]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     ref: targetRef,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h2", {
+      children: ["Average Score: ", aveScore]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       "class": "reviewList",
-      children: [//Display all reviews
-      reviews.map(function (review, index) {
+      children: [//Display all 
+      reviews ? reviews.map(function (review, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_review__WEBPACK_IMPORTED_MODULE_2__.default, {
           review: review
         }, props.movieTitle + "review" + index);
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+      }) : "", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: //Mention if there aren't any reviews for this movie yet.
         reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : "Checking for reviews..."
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
@@ -2745,7 +2780,7 @@ function ReviewList(props) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_reviewForm__WEBPACK_IMPORTED_MODULE_3__.default, {
         movieTitle: props.movieTitle
       })]
-    })
+    })]
   });
 }
 
