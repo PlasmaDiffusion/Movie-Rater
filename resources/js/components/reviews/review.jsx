@@ -11,7 +11,7 @@ function Review(props)
     <div className="review">
         
         <h3 style={{textAlign: "left"}}>Review by {props.review.reviewerName}</h3>
-        <p> {props.review.score}/5 </p>
+        <p> ★{props.review.score}/5 </p>
         <p> {props.review.comment} </p>
     
     </div>
