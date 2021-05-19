@@ -2504,7 +2504,7 @@ function Review(props) {
       },
       children: ["Review by ", props.review.reviewerName]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
-      children: [" ", props.review.score, "/5 "]
+      children: [" \u2605", props.review.score, "/5 "]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
       children: [" ", props.review.comment, " "]
     })]
