@@ -76,7 +76,10 @@ class MovieController extends Controller
         }
 
         //Calculate the average
-        $aveScore = $totalScore / count($movie->reviews);
+        $aveScore = 0;
+
+        if (count($movie->reviews) > 0)
+            $aveScore = $totalScore / count($movie->reviews);
 
         //Update the average score, if not up to date
         if ($movie->averageScore != $aveScore) {
