@@ -2045,8 +2045,10 @@ var App = /*#__PURE__*/function (_Component) {
             id: 54,
             category: "Japanese Animated Films"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_serverAPI_Test__WEBPACK_IMPORTED_MODULE_2__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_reduxTest__WEBPACK_IMPORTED_MODULE_6__.default, {})]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          style: {
+            margin: "20px"
+          }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("footer", {
           children: ["This site uses an API from", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
             href: "https://www.themoviedb.org/",
@@ -2774,7 +2776,7 @@ function ReviewList(props) {
         }, props.movieTitle + "review" + index);
       }) : "", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: //Loading reviews...
-        reviews.length == 0 && !reviewsLoaded ? "Checking for reviews..." : ""
+        !reviewsLoaded ? "Checking for reviews..." : ""
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: //Mention if there aren't any reviews for this movie yet.
         reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : ""
