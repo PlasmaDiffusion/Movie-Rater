@@ -2773,10 +2773,11 @@ function ReviewList(props) {
           review: review
         }, props.movieTitle + "review" + index);
       }) : "", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-        children: //Mention if there aren't any reviews for this movie yet.
-        reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : "Checking for reviews..."
+        children: //Loading reviews...
+        reviews.length == 0 && !reviewsLoaded ? "Checking for reviews..." : ""
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-        children: props.movieTitle
+        children: //Mention if there aren't any reviews for this movie yet.
+        reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : ""
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_reviewForm__WEBPACK_IMPORTED_MODULE_3__.default, {
         movieTitle: props.movieTitle
       })]

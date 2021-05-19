@@ -56,9 +56,11 @@ function ReviewList(props)
 
          ))) : ""}
 
+         <p>{ //Loading reviews...
+         reviews.length == 0 && !reviewsLoaded ? "Checking for reviews..." : ""}</p>
          <p>{ //Mention if there aren't any reviews for this movie yet.
-         reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : "Checking for reviews..."}</p>
-        <p>{props.movieTitle}</p>
+         reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : ""}</p>
+         
          <ReviewForm movieTitle={props.movieTitle} />
          </div>
 
