@@ -62,3 +62,48 @@
     height: 70%;
     background-color: $bg2;
 }
+
+//Submit button
+button {
+    font-size: 1.5rem;
+    background-color: $bg1;
+    color: white;
+    border-color: $bg2;
+    border-radius: 4px;
+    outline: $bg2;
+}
+
+button:hover {
+    font-size: 1.5rem;
+    background-color: $bg1;
+    color: white;
+}
+
+@media screen and (max-width: 480px) {
+    .listedMovie {
+        width: 128px;
+        img {
+            width: 128px;
+            height: 128px;
+        }
+        p {
+            overflow-wrap: normal;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            overflow: visible;
+            text-overflow: ellipsis;
+        }
+
+        .movieName {
+            height: 48px;
+        }
+    }
+
+    //If the movie title has a lot of characters, make the text smaller (smaller than usual for phones)
+    .text-small {
+        font-size: 10pt;
+    }
+    .text-smaller {
+        font-size: 8.8pt;
+    }
+}

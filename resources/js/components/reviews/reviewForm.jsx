@@ -8,7 +8,7 @@ function ReviewForm(props)
 
     //States the froms would change
     const [reviewerName, setName] = useState("");
-    const [score, setScore] = useState(1);
+    const [score, setScore] = useState(3);
     const [comment, setComment] = useState("");
 
 
@@ -41,7 +41,12 @@ function ReviewForm(props)
     
     }
 
-
+    //Click a star and update the score. The render part below will take care of the star output.
+    function onClickStar(e)
+    {
+        console.log(e.target.value);
+        setScore(e.target.value);
+    }
 
 
  return(
@@ -51,30 +56,38 @@ function ReviewForm(props)
 
         {/*<form method="POST" onSubmit={submitReview}>*/}
         <form method="POST" action="api/review">
-            <label>Username </label><br></br>
-            <input name="reviewerName" onChange={(e) => setName(e.value)}></input><br></br><br></br>
+            <label >Username </label><br></br>
+            <input name="reviewerName" type="text" placeholder="Your name here..." onChange={(e) => setName(e.value)}></input><br></br><br></br>
             <label>Reviewing </label><br></br>
             <input readOnly = {true} type="text" id="movie" name="movieName" value={props.movieTitle} ></input>
 
             <div>
+                <br></br><br></br>
 
-                <input type="radio" name="score" id="score1" value="1" ></input>
-                <label className="star">1</label>
-                <input type="radio" name="score" id="score2" value="2" ></input>
-                <label className="star">2</label>
-                <input type="radio" name="score" id="score3" value="3" ></input>
-                <label className="star">3</label>
-                <input type="radio" name="score" id="score4" value="4" ></input>
-                <label className="star">4</label>
-                <input type="radio" name="score" id="score5" value="5" ></input>
-                <label className="star">5</label>
+                <input type="radio" className="invisibleRadio" onClick={onClickStar} name="score" id="score1" value="1" ></input>
+                <label className="star">★</label>
+                <input type="radio" className="invisibleRadio" onClick={onClickStar} name="score" id="score2" value="2" ></input>
+                <label className="star">{score > 1 ? "★" : "☆"}</label>
+                <input type="radio" className="invisibleRadio" onClick={onClickStar} name="score" id="score3" value="3" ></input>
+                <label className="star">{score > 2 ? "★" : "☆"}</label>
+                <input type="radio" className="invisibleRadio" onClick={onClickStar} name="score" id="score4" value="4" ></input>
+                <label className="star">{score > 3 ? "★" : "☆"}</label>
+                <input type="radio" className="invisibleRadio" onClick={onClickStar} name="score" id="score5" value="5" ></input>
+                <label className="star">{score > 4 ? "★" : "☆"}</label>
+                <br></br>
+
+                
+                <label>{score}/5</label>
+
+                <br></br><br></br>
+
             </div>
 
             <br></br>
 
-            <textarea name="comment"></textarea>
+            <textarea name="comment" rows="4" cols="50" placeholder="Your review here..."></textarea>
             
-            <br></br>
+            <br></br><br></br>
 
              <input type="submit" />
          </form>

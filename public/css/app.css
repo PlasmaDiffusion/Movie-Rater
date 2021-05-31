@@ -28,6 +28,12 @@ footer a {
   color: white;
 }
 
+form {
+  border: 1px solid #380180;
+  padding: 2px;
+  z-index: -2;
+}
+
 .flex-container {
   display: flex;
   width: 100%;
@@ -60,32 +66,4 @@ footer a {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-@media screen and (max-width: 480px) {
-  .listedMovie {
-    width: 128px;
-  }
-  .listedMovie img {
-    width: 128px;
-    height: 128px;
-  }
-  .listedMovie p {
-    overflow-wrap: normal;
-    margin-top: 1px;
-    margin-bottom: 1px;
-    overflow: visible;
-    text-overflow: ellipsis;
-  }
-  .listedMovie .movieName {
-    height: 48px;
-  }
-
-  .text-small {
-    font-size: 10pt;
-  }
-
-  .text-smaller {
-    font-size: 8.8pt;
-  }
 }

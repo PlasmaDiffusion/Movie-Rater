@@ -15,8 +15,11 @@
 
 .review {
     border: solid 1px mediumslateblue;
+    background: $bg2;
     width: 50%;
     margin: auto;
+    padding: 4px;
+    margin-top: 1rem;
 
     h3 {
         text-align: center;
@@ -24,5 +27,86 @@
 
     p:first-of-type {
         text-align: center;
+    }
+}
+
+//Hide the radio input but let the user still click it, and have star ASCIIs above it
+.invisibleRadio {
+    opacity: 0;
+}
+
+.star {
+    font-size: 32px;
+    position: relative;
+    left: -32px;
+    z-index: -1;
+}
+
+input[type="text"] {
+    width: 30%;
+    font-size: 1rem;
+}
+
+//Submit button
+input[type="submit"] {
+    font-size: 1.5rem;
+    background-color: $bg2;
+    color: white;
+    border-color: $bg2;
+    border-radius: 4px;
+    outline: $bg2;
+}
+
+input[type="submit"]:hover {
+    font-size: 1.5rem;
+    background-color: $bg1;
+    color: white;
+}
+
+textarea {
+    margin: auto;
+    font-size: 1rem;
+    color: white;
+    background-color: $inputBG;
+}
+
+//Text input colours and border
+input[type="text"],
+textarea {
+    color: white;
+    background-color: $inputBG;
+    border: 1px solid rgb(34, 34, 34);
+    border-radius: 4px;
+}
+
+@media screen and (max-width: 480px) {
+    input[type="text"] {
+        width: 60%;
+    }
+
+    textarea {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .star {
+        font-size: 24px;
+        position: relative;
+        left: -24px;
+        z-index: -1;
+    }
+
+    .invisibleRadio {
+        font-size: 24px;
+    }
+}
+
+//Extra small star so it still fits on a tiny phone
+@media screen and (max-width: 350px) {
+    .star {
+        font-size: 16px;
+        position: relative;
+        left: -16px;
+        z-index: -1;
     }
 }

@@ -2556,7 +2556,7 @@ function ReviewForm(props) {
       reviewerName = _useState2[0],
       setName = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(3),
       _useState4 = _slicedToArray(_useState3, 2),
       score = _useState4[0],
       setScore = _useState4[1];
@@ -2584,6 +2584,12 @@ function ReviewForm(props) {
       console.log(res.data);
       alert("Submitted");
     });
+  } //Click a star and update the score. The render part below will take care of the star output.
+
+
+  function onClickStar(e) {
+    console.log(e.target.value);
+    setScore(e.target.value);
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -2597,6 +2603,8 @@ function ReviewForm(props) {
         children: "Username "
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         name: "reviewerName",
+        type: "text",
+        placeholder: "Your name here...",
         onChange: function onChange(e) {
           return setName(e.value);
         }
@@ -2609,50 +2617,65 @@ function ReviewForm(props) {
         name: "movieName",
         value: props.movieTitle
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
           type: "radio",
+          className: "invisibleRadio",
+          onClick: onClickStar,
           name: "score",
           id: "score1",
           value: "1"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
-          children: "1"
+          children: "\u2605"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
           type: "radio",
+          className: "invisibleRadio",
+          onClick: onClickStar,
           name: "score",
           id: "score2",
           value: "2"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
-          children: "2"
+          children: score > 1 ? "★" : "☆"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
           type: "radio",
+          className: "invisibleRadio",
+          onClick: onClickStar,
           name: "score",
           id: "score3",
           value: "3"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
-          children: "3"
+          children: score > 2 ? "★" : "☆"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
           type: "radio",
+          className: "invisibleRadio",
+          onClick: onClickStar,
           name: "score",
           id: "score4",
           value: "4"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
-          children: "4"
+          children: score > 3 ? "★" : "☆"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
           type: "radio",
+          className: "invisibleRadio",
+          onClick: onClickStar,
           name: "score",
           id: "score5",
           value: "5"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
           className: "star",
-          children: "5"
-        })]
+          children: score > 4 ? "★" : "☆"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
+          children: [score, "/5"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {})]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
-        name: "comment"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        name: "comment",
+        rows: "4",
+        cols: "50",
+        placeholder: "Your review here..."
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
         type: "submit"
       })]
     })]
@@ -7318,7 +7341,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".listedMovie {\n  background-color: #21004d;\n  border-radius: 12px;\n  margin: auto;\n  margin-left: 2rem;\n  margin-right: 2rem;\n  display: inline-block;\n  margin-bottom: 16px;\n  padding-left: 16px;\n  padding-right: 16px;\n  padding-bottom: 4px;\n}\n.listedMovie p {\n  color: white;\n}\n.listedMovie .movieName {\n  height: 32px;\n}\n.listedMovie img {\n  border-radius: 8px;\n}\n\n.text-small {\n  font-size: 11pt;\n}\n\n.text-smaller {\n  font-size: 10pt;\n}\n\n.movieBG,\n.movieDetails {\n  position: fixed;\n  color: white;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #21004d;\n}\n.movieBG h2,\n.movieBG button,\n.movieBG p,\n.movieDetails h2,\n.movieDetails button,\n.movieDetails p {\n  opacity: 1;\n}\n\n.movieDetails {\n  position: relative;\n  margin: auto;\n  margin-top: 1%;\n  width: 50%;\n  height: 70%;\n  background-color: #380180;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".listedMovie {\n  background-color: #21004d;\n  border-radius: 12px;\n  margin: auto;\n  margin-left: 2rem;\n  margin-right: 2rem;\n  display: inline-block;\n  margin-bottom: 16px;\n  padding-left: 16px;\n  padding-right: 16px;\n  padding-bottom: 4px;\n}\n.listedMovie p {\n  color: white;\n}\n.listedMovie .movieName {\n  height: 32px;\n}\n.listedMovie img {\n  border-radius: 8px;\n}\n\n.text-small {\n  font-size: 11pt;\n}\n\n.text-smaller {\n  font-size: 10pt;\n}\n\n.movieBG,\n.movieDetails {\n  position: fixed;\n  color: white;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #21004d;\n}\n.movieBG h2,\n.movieBG button,\n.movieBG p,\n.movieDetails h2,\n.movieDetails button,\n.movieDetails p {\n  opacity: 1;\n}\n\n.movieDetails {\n  position: relative;\n  margin: auto;\n  margin-top: 1%;\n  width: 50%;\n  height: 70%;\n  background-color: #380180;\n}\n\nbutton {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n  border-color: #380180;\n  border-radius: 4px;\n  outline: #380180;\n}\n\nbutton:hover {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n}\n\n@media screen and (max-width: 480px) {\n  .listedMovie {\n    width: 128px;\n  }\n  .listedMovie img {\n    width: 128px;\n    height: 128px;\n  }\n  .listedMovie p {\n    overflow-wrap: normal;\n    margin-top: 1px;\n    margin-bottom: 1px;\n    overflow: visible;\n    text-overflow: ellipsis;\n  }\n  .listedMovie .movieName {\n    height: 48px;\n  }\n\n  .text-small {\n    font-size: 10pt;\n  }\n\n  .text-smaller {\n    font-size: 8.8pt;\n  }\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7342,7 +7365,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".reviewList {\n  height: 30%;\n  width: 60%;\n  margin-left: 20%;\n}\n.reviewList p {\n  text-align: left;\n}\n\n.review {\n  border: solid 1px mediumslateblue;\n  width: 50%;\n  margin: auto;\n}\n.review h3 {\n  text-align: center;\n}\n.review p:first-of-type {\n  text-align: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".reviewList {\n  height: 30%;\n  width: 60%;\n  margin-left: 20%;\n}\n.reviewList p {\n  text-align: left;\n}\n\n.review {\n  border: solid 1px mediumslateblue;\n  background: #380180;\n  width: 50%;\n  margin: auto;\n  padding: 4px;\n  margin-top: 1rem;\n}\n.review h3 {\n  text-align: center;\n}\n.review p:first-of-type {\n  text-align: center;\n}\n\n.invisibleRadio {\n  opacity: 0;\n}\n\n.star {\n  font-size: 32px;\n  position: relative;\n  left: -32px;\n  z-index: -1;\n}\n\ninput[type=text] {\n  width: 30%;\n  font-size: 1rem;\n}\n\ninput[type=submit] {\n  font-size: 1.5rem;\n  background-color: #380180;\n  color: white;\n  border-color: #380180;\n  border-radius: 4px;\n  outline: #380180;\n}\n\ninput[type=submit]:hover {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n}\n\ntextarea {\n  margin: auto;\n  font-size: 1rem;\n  color: white;\n  background-color: #12002b;\n}\n\ninput[type=text],\ntextarea {\n  color: white;\n  background-color: #12002b;\n  border: 1px solid #222222;\n  border-radius: 4px;\n}\n\n@media screen and (max-width: 480px) {\n  input[type=text] {\n    width: 60%;\n  }\n\n  textarea {\n    margin-left: 0;\n    width: 100%;\n  }\n\n  .star {\n    font-size: 24px;\n    position: relative;\n    left: -24px;\n    z-index: -1;\n  }\n\n  .invisibleRadio {\n    font-size: 24px;\n  }\n}\n@media screen and (max-width: 350px) {\n  .star {\n    font-size: 16px;\n    position: relative;\n    left: -16px;\n    z-index: -1;\n  }\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
