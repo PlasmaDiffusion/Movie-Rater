@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MovieDetails from './movieDetails';
 import MovieCard from './movieCard';
+import "./movie.scss"
 
 function MovieList(props){
 

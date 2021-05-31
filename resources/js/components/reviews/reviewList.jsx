@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useVisible } from 'react-hooks-visible'
 import Review from './review';
 import ReviewForm from "./reviewForm";
+import "./review.scss";
 
 
 //Get all reviews for the particular movie, and list them. Also have a form to submit a review at the bottom.
@@ -56,11 +57,12 @@ function ReviewList(props)
 
          ))) : ""}
 
-         <p>{ //Loading reviews...
+         <p style={{textAlign:"center"}}>{ //Loading reviews...
          !reviewsLoaded ? "Checking for reviews..." : ""}</p>
-         <p>{ //Mention if there aren't any reviews for this movie yet.
+         <p style={{textAlign:"center"}}>{ //Mention if there aren't any reviews for this movie yet.
          reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : ""}</p>
          
+         <br></br><br></br>
          <ReviewForm movieTitle={props.movieTitle} />
          </div>
 

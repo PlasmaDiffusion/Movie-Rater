@@ -1,0 +1,28 @@
+@import "../../../sass/variables";
+
+//Review related
+.reviewList {
+    //position: absolute;
+    //overflow: scroll;
+    height: 30%;
+    width: 60%;
+    margin-left: 20%;
+
+    p {
+        text-align: left;
+    }
+}
+
+.review {
+    border: solid 1px mediumslateblue;
+    width: 50%;
+    margin: auto;
+
+    h3 {
+        text-align: center;
+    }
+
+    p:first-of-type {
+        text-align: center;
+    }
+}

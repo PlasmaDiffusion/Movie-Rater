@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {decrement, increment} from "./actions";
-
+import {decrement, increment} from "../components/redux/actions/index"
 function ReduxTest(props){
 
     //var [listDescription, setListDescription] = useState("");

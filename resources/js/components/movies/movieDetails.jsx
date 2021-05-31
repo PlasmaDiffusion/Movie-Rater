@@ -6,7 +6,7 @@ import { useVisible } from 'react-hooks-visible'
 //import {setMovieId} from './actions';
 
 import axios from 'axios';
-import ReviewList from './reviews/reviewList';
+import ReviewList from '../reviews/reviewList';
 
 //A window showing movie information, and reviews. It also will load in stuff from the database.
 function MovieDetails(props){

@@ -1,0 +1,64 @@
+@import "../../../sass/variables";
+
+.listedMovie {
+    background-color: $bg1;
+    border-radius: 12px;
+    margin: auto;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    display: inline-block;
+    margin-bottom: 16px;
+
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 4px;
+
+    p {
+        color: white;
+    }
+
+    .movieName {
+        height: 32px;
+    }
+
+    img {
+        border-radius: 8px;
+    }
+}
+
+//If the movie title has a lot of characters, make the text smaller
+.text-small {
+    font-size: 11pt;
+}
+
+.text-smaller {
+    font-size: 10pt;
+}
+
+//Movie window
+.movieBG,
+.movieDetails {
+    //Fill in the entire screen but as a black transparent block
+    position: fixed;
+    color: white;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $bg1;
+
+    h2,
+    button,
+    p {
+        opacity: 1;
+    }
+}
+
+.movieDetails {
+    position: relative;
+    margin: auto;
+    margin-top: 1%;
+    width: 50%;
+    height: 70%;
+    background-color: $bg2;
+}
