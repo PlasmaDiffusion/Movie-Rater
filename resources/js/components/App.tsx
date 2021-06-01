@@ -42,9 +42,59 @@ class App extends Component {
     }
 }
 
+
+
 ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById("app")
 );
+
+
+
+// import React, { useState } from "react";
+// import ReactDOM from "react-dom";
+
+// // //Redux imports
+// import { Provider } from "react-redux";
+
+// export interface IUser {
+//     name: string;
+//     age: number;
+// }
+// const App = () => {
+//     const [users, setUsers] = useState<IUser[]>([
+//         {
+//             name: "Bijaya",
+//             age: 25,
+//         },
+//         {
+//             name: "Ram",
+//             age: 25,
+//         },
+//     ]);
+
+//     return (
+//         <div>
+//             <h1>Users list</h1>
+//             <ul>
+//                 {users.map((user: IUser) => {
+//                     return (
+//                         <li key={user.name}>
+//                             {user.name} is {user.age} years old
+//                         </li>
+//                     );
+//                 })}
+//             </ul>
+//         </div>
+//     );
+// };
+
+
+// ReactDOM.render(
+//         <App />,
+//     document.getElementById("app")
+// );
+
+export default App;
