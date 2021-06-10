@@ -20,6 +20,7 @@
     margin: auto;
     padding: 4px;
     margin-top: 1rem;
+    border-radius: 4px;
 
     h3 {
         text-align: center;
@@ -76,6 +77,10 @@ textarea {
     color: white;
     background-color: $inputBG;
     border: 1px solid rgb(34, 34, 34);
+    border-radius: 4px;
+}
+
+.reviewForm {
     border-radius: 4px;
 }
 
