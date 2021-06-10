@@ -4,7 +4,12 @@ import MovieDetails from './movieDetails';
 import MovieCard from './movieCard';
 import "./movie.scss"
 
-function MovieList(props){
+interface ListProps{
+  id: number,
+  category: string
+}
+
+function MovieList(props: ListProps){
 
     var [movieArray, setMovieArray] = useState([]);
     //var [listDescription, setListDescription] = useState("");

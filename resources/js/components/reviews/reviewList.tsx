@@ -5,8 +5,20 @@ import ReviewForm from "./reviewForm";
 import "./review.scss";
 
 
+import axios from 'axios';
+
+
+export interface ReviewProps{
+  movieTitle?: string;
+  review?: {
+    reviewerName: string;
+    score: number;
+    comment?: string;
+  }
+}
+
 //Get all reviews for the particular movie, and list them. Also have a form to submit a review at the bottom.
-function ReviewList(props)
+function ReviewList(props: ReviewProps)
 {
 
 
@@ -48,7 +60,7 @@ function ReviewList(props)
  return(
      <div ref={targetRef}>
         <h2>Average Score: {aveScore}</h2>
-         <div class="reviewList">
+         <div className="reviewList">
          { //Display all 
          reviews ? (
          reviews.map((review, index) => (

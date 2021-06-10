@@ -8,8 +8,11 @@ import { useVisible } from 'react-hooks-visible'
 import axios from 'axios';
 import ReviewList from '../reviews/reviewList';
 
+
+import {MovieProps} from "./movieCard";
+
 //A window showing movie information, and reviews. It also will load in stuff from the database.
-function MovieDetails(props){
+function MovieDetails(props: MovieProps){
 
   //Check when this window is visible.
   const [targetRef, visible] = useVisible();

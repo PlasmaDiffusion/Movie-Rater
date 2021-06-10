@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
 
+import {ReviewProps} from "./reviewList";
+
 //The form to submit a review at the bottom of the page.
-function ReviewForm(props)
+function ReviewForm(props: ReviewProps)
 {
 
     //States the froms would change
@@ -42,10 +44,10 @@ function ReviewForm(props)
     }
 
     //Click a star and update the score. The render part below will take care of the star output.
-    function onClickStar(e)
+    function onClickStar(e: React.MouseEvent<HTMLInputElement>)
     {
-        console.log(e.target.value);
-        setScore(e.target.value);
+        console.log(e.currentTarget.value);
+        setScore(parseInt(e.currentTarget.value));
     }
 
 
@@ -57,7 +59,7 @@ function ReviewForm(props)
         {/*<form method="POST" onSubmit={submitReview}>*/}
         <form method="POST" action="api/review">
             <label >Username </label><br></br>
-            <input name="reviewerName" type="text" placeholder="Your name here..." onChange={(e) => setName(e.value)}></input><br></br><br></br>
+            <input name="reviewerName" type="text" placeholder="Your name here..." onChange={(e: React.FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}></input><br></br><br></br>
             <label>Reviewing </label><br></br>
             <input readOnly = {true} type="text" id="movie" name="movieName" value={props.movieTitle} ></input>
 
@@ -85,7 +87,7 @@ function ReviewForm(props)
 
             <br></br>
 
-            <textarea name="comment" rows="4" cols="50" placeholder="Your review here..."></textarea>
+            <textarea name="comment" rows={4} cols={50} placeholder="Your review here..."></textarea>
             
             <br></br><br></br>
 
