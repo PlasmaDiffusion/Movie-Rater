@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ServerAPI_Test from "./serverAPI_Test";
 import MovieList from "./movies/movieList";
 
 //Redux imports
