@@ -2148,7 +2148,7 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
-var movieDetails_1 = __importDefault(__webpack_require__(/*! ./movieDetails */ "./resources/js/components/movies/movieDetails.tsx")); //A card that shows the movie title, star rating, and poster. When clicked this will show its child, MovieDetails.
+var movieDetails_1 = __importDefault(__webpack_require__(/*! ./movieDetails */ "./resources/js/components/movies/movieDetails.tsx")); //A card that shows the movie title, star rating, review count and poster. When clicked this will show its child, MovieDetails.
 
 
 function MovieCard(props) {
@@ -2172,15 +2172,11 @@ function MovieCard(props) {
     className: "listedMovie",
     key: "movie" + props.id,
     onClick: openDetailsWindow
-  }, props.movie.title.length > 50 ? react_1["default"].createElement("p", {
-    className: "movieName text-smaller"
-  }, props.movie.title) : "", props.movie.title.length > 30 && props.movie.title.length <= 50 ? react_1["default"].createElement("p", {
-    className: "movieName text-small"
-  }, props.movie.title) : "", props.movie.title.length <= 30 ? react_1["default"].createElement("p", {
-    className: "movieName"
-  }, props.movie.title) : "", react_1["default"].createElement("p", {
+  }, react_1["default"].createElement("div", {
+    className: "showOnHover"
+  }, react_1["default"].createElement("p", {
     className: "stars"
-  }, "\u2605\u2605\u2605\u2606\u2606"), react_1["default"].createElement("img", {
+  }, "\u2605\u2605\u2605\u2606\u2606"), react_1["default"].createElement("p", null, props.reviewCount, " reviews")), react_1["default"].createElement("img", {
     src: "https://image.tmdb.org/t/p/original/" + props.movie.poster_path,
     width: 167,
     height: 250
@@ -2368,7 +2364,7 @@ function MovieList(props) {
       setMovieArray(res.data.items); //setListDescription(res.data.description);
     });
   }, []);
-  return react_1["default"].createElement("div", null, " ", react_1["default"].createElement("h2", null, props.category), react_1["default"].createElement("div", {
+  return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, props.category), react_1["default"].createElement("div", {
     className: "flex-container"
   }, movieArray.map(function (movie, index) {
     return react_1["default"].createElement(movieCard_1["default"], {
@@ -7333,7 +7329,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".listedMovie {\n  background-color: #21004d;\n  border-radius: 12px;\n  margin: auto;\n  margin-left: 2rem;\n  margin-right: 2rem;\n  display: inline-block;\n  margin-bottom: 16px;\n  padding-left: 16px;\n  padding-right: 16px;\n  padding-bottom: 4px;\n}\n.listedMovie p {\n  color: white;\n}\n.listedMovie .movieName {\n  height: 32px;\n}\n.listedMovie img {\n  border-radius: 8px;\n}\n\n.text-small {\n  font-size: 11pt;\n}\n\n.text-smaller {\n  font-size: 10pt;\n}\n\n.movieBG,\n.movieDetails {\n  position: fixed;\n  color: white;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #21004d;\n}\n.movieBG h2,\n.movieBG button,\n.movieBG p,\n.movieDetails h2,\n.movieDetails button,\n.movieDetails p {\n  opacity: 1;\n}\n.movieBG button:hover,\n.movieDetails button:hover {\n  background-color: #380180;\n}\n\n.movieDetails {\n  position: relative;\n  margin: auto;\n  margin-top: 1%;\n  width: 50%;\n  height: 70%;\n  background-color: #380180;\n}\n\nbutton {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n  border-color: #380180;\n  border-radius: 4px;\n  outline: #380180;\n}\n\nbutton:hover {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n}\n\n@media screen and (max-width: 480px) {\n  .listedMovie {\n    width: 128px;\n  }\n  .listedMovie img {\n    width: 128px;\n    height: 128px;\n  }\n  .listedMovie p {\n    overflow-wrap: normal;\n    margin-top: 1px;\n    margin-bottom: 1px;\n    overflow: visible;\n    text-overflow: ellipsis;\n  }\n  .listedMovie .movieName {\n    height: 48px;\n  }\n\n  .text-small {\n    font-size: 10pt;\n  }\n\n  .text-smaller {\n    font-size: 8.8pt;\n  }\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".listedMovie {\n  background-color: #21004d;\n  border-radius: 12px;\n  margin: auto;\n  margin-left: 2rem;\n  margin-right: 2rem;\n  display: inline-block;\n  margin-bottom: 16px;\n  padding-left: 16px;\n  padding-right: 16px;\n  padding-bottom: 4px;\n  padding-top: 0;\n  background: none;\n}\n.listedMovie p {\n  color: white;\n}\n.listedMovie .movieName {\n  height: 32px;\n}\n.listedMovie img {\n  border-radius: 8px;\n}\n.listedMovie .showOnHover {\n  visibility: hidden;\n}\n\n.text-small {\n  font-size: 11pt;\n}\n\n.text-smaller {\n  font-size: 10pt;\n}\n\n.movieBG,\n.movieDetails {\n  position: fixed;\n  color: white;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #21004d;\n}\n.movieBG h2,\n.movieBG button,\n.movieBG p,\n.movieDetails h2,\n.movieDetails button,\n.movieDetails p {\n  opacity: 1;\n}\n.movieBG button:hover,\n.movieDetails button:hover {\n  background-color: #380180;\n}\n\n.movieDetails {\n  position: relative;\n  margin: auto;\n  margin-top: 1%;\n  width: 50%;\n  height: 70%;\n  background-color: #380180;\n}\n\nbutton {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n  border-color: #380180;\n  border-radius: 4px;\n  outline: #380180;\n}\n\nbutton:hover {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n}\n\n.listedMovie:hover {\n  background: #21004d;\n  -webkit-animation: grow 0.5s forwards;\n          animation: grow 0.5s forwards;\n}\n.listedMovie:hover .showOnHover {\n  visibility: visible;\n  -webkit-animation: fade 0.5s forwards;\n          animation: fade 0.5s forwards;\n}\n\n@-webkit-keyframes fade {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n\n@keyframes fade {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@-webkit-keyframes grow {\n  from {\n    transform: scale(1);\n  }\n  to {\n    transform: scale(1.2);\n  }\n}\n@keyframes grow {\n  from {\n    transform: scale(1);\n  }\n  to {\n    transform: scale(1.2);\n  }\n}\n@media screen and (max-width: 480px) {\n  .listedMovie {\n    width: 128px;\n  }\n  .listedMovie img {\n    width: 128px;\n    height: 128px;\n  }\n  .listedMovie p {\n    overflow-wrap: normal;\n    margin-top: 1px;\n    margin-bottom: 1px;\n    overflow: visible;\n    text-overflow: ellipsis;\n  }\n  .listedMovie .movieName {\n    height: 48px;\n  }\n\n  .text-small {\n    font-size: 10pt;\n  }\n\n  .text-smaller {\n    font-size: 8.8pt;\n  }\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7357,7 +7353,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".reviewList {\n  height: 30%;\n  width: 60%;\n  margin-left: 20%;\n}\n.reviewList p {\n  text-align: left;\n}\n\n.review {\n  border: solid 1px mediumslateblue;\n  background: #380180;\n  width: 50%;\n  margin: auto;\n  padding: 4px;\n  margin-top: 1rem;\n  border-radius: 4px;\n}\n.review h3 {\n  text-align: center;\n}\n.review p:first-of-type {\n  text-align: center;\n}\n\n.invisibleRadio {\n  opacity: 0;\n}\n\n.star {\n  font-size: 32px;\n  position: relative;\n  left: -32px;\n  z-index: -1;\n}\n\ninput[type=text] {\n  width: 30%;\n  font-size: 1rem;\n}\n\ninput[type=submit] {\n  font-size: 1.5rem;\n  background-color: #380180;\n  color: white;\n  border-color: #380180;\n  border-radius: 4px;\n  outline: #380180;\n}\n\ninput[type=submit]:hover {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n}\n\ntextarea {\n  margin: auto;\n  font-size: 1rem;\n  color: white;\n  background-color: #12002b;\n}\n\ninput[type=text],\ntextarea {\n  color: white;\n  background-color: #12002b;\n  border: 1px solid #222222;\n  border-radius: 4px;\n}\n\n.reviewForm {\n  border-radius: 4px;\n}\n\n@media screen and (max-width: 480px) {\n  input[type=text] {\n    width: 60%;\n  }\n\n  textarea {\n    margin-left: 0;\n    width: 100%;\n  }\n\n  .star {\n    font-size: 24px;\n    position: relative;\n    left: -24px;\n    z-index: -1;\n  }\n\n  .invisibleRadio {\n    font-size: 24px;\n  }\n}\n@media screen and (max-width: 350px) {\n  .star {\n    font-size: 16px;\n    position: relative;\n    left: -16px;\n    z-index: -1;\n  }\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".reviewList {\n  height: 30%;\n  width: 60%;\n  margin-left: 20%;\n}\n.reviewList p {\n  text-align: left;\n}\n\n.review {\n  border: solid 1px mediumslateblue;\n  background: #380180;\n  width: 50%;\n  margin: auto;\n  padding: 4px;\n  margin-top: 1rem;\n  border-radius: 4px;\n}\n.review h3 {\n  text-align: center;\n}\n.review p:first-of-type {\n  text-align: center;\n}\n\n.invisibleRadio {\n  opacity: 0;\n}\n\n.star {\n  font-size: 32px;\n  position: relative;\n  left: -32px;\n  z-index: -1;\n}\n\ninput[type=text] {\n  width: 30%;\n  font-size: 1rem;\n}\n\ninput[type=submit] {\n  font-size: 1.5rem;\n  background-color: #380180;\n  color: white;\n  border-color: #380180;\n  border-radius: 4px;\n  outline: #380180;\n}\n\ninput[type=submit]:hover {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n}\n\ntextarea {\n  margin: auto;\n  font-size: 1rem;\n  color: white;\n  background-color: #12002b;\n}\n\ninput[type=text],\ntextarea {\n  color: white;\n  background-color: #12002b;\n  border: 1px solid #222222;\n  border-radius: 4px;\n}\n\n@media screen and (max-width: 480px) {\n  input[type=text] {\n    width: 60%;\n  }\n\n  textarea {\n    margin-left: 0;\n    width: 100%;\n  }\n\n  .star {\n    font-size: 24px;\n    position: relative;\n    left: -24px;\n    z-index: -1;\n  }\n\n  .invisibleRadio {\n    font-size: 24px;\n  }\n}\n@media screen and (max-width: 350px) {\n  .star {\n    font-size: 16px;\n    position: relative;\n    left: -16px;\n    z-index: -1;\n  }\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

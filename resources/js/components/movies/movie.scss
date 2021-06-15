@@ -12,6 +12,7 @@
     padding-left: 16px;
     padding-right: 16px;
     padding-bottom: 4px;
+    padding-top: 0;
 
     p {
         color: white;
@@ -24,6 +25,12 @@
     img {
         border-radius: 8px;
     }
+
+    .showOnHover {
+        visibility: hidden;
+        //animation: fade 0.5s backwards;
+    }
+    background: none;
 }
 
 //If the movie title has a lot of characters, make the text smaller
@@ -81,6 +88,36 @@ button:hover {
     font-size: 1.5rem;
     background-color: $bg1;
     color: white;
+}
+
+//Movie shows review count and score while selected but hides it otherwise
+.listedMovie:hover {
+    background: $bg1;
+    animation: grow 0.5s forwards;
+
+    .showOnHover {
+        visibility: visible;
+
+        animation: fade 0.5s forwards;
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes grow {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.2);
+    }
 }
 
 @media screen and (max-width: 480px) {

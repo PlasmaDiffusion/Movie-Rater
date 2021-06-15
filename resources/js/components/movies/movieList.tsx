@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import MovieDetails from './movieDetails';
 import MovieCard from './movieCard';
 import "./movie.scss"
 
@@ -26,13 +25,17 @@ function MovieList(props: ListProps){
 
 
 
-    return (<div> <h2>{props.category}</h2>
-    <div className="flex-container" >
-        {movieArray.map((movie, index) => (
-          <MovieCard movie={movie} id={index} key={props.category + index} />
-        ))}
+    return (
+    <div> 
+      
+      <h2>{props.category}</h2>
+      <div className="flex-container" >
+          {movieArray.map((movie, index) => (
+            <MovieCard movie={movie} id={index} key={props.category + index} />
+          ))}
+      </div>
     </div>
-    </div>);
+    );
 }
 
 export default MovieList;
