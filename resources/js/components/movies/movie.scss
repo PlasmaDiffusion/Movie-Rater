@@ -60,9 +60,7 @@
         opacity: 1;
     }
 
-    button:hover {
-        background-color: $bg2;
-    }
+    animation: fade 0.5s forwards;
 }
 
 .movieDetails {
@@ -70,8 +68,8 @@
     margin: auto;
     margin-top: 1%;
     width: 50%;
-    height: 70%;
     background-color: $bg2;
+    border-radius: 12px;
 }
 
 //Submit button
@@ -102,6 +100,33 @@ button:hover {
     }
 }
 
+.movieRow {
+    display: flex;
+
+    //Scroll right
+    button {
+        display: block;
+        position: relative;
+        height: 400px;
+        width: 128px;
+    }
+
+    button:first {
+        margin-left: 100px;
+    }
+}
+
+.close {
+    margin-left: 90%;
+    height: 32px !important;
+    width: 64px !important;
+}
+
+.close:hover {
+    background-color: $bg2;
+}
+
+//Animations
 @keyframes fade {
     from {
         opacity: 0;

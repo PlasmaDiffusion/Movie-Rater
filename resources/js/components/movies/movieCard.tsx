@@ -20,6 +20,7 @@ export interface MovieProps  {
 interface CardProps extends MovieProps{
     reviewCount: number;
     average: number;
+    category: string;
 }
 
 
@@ -45,13 +46,13 @@ function MovieCard(props: CardProps){
     }
 
 return(<React.Fragment>
-    <div className="listedMovie" key={"movie" + props.id} onClick={openDetailsWindow}>
+    <div className="listedMovie" key={"movie" + props.id} onClick={openDetailsWindow} id={props.category}>
         <div className="showOnHover">
             {/*props.movie.title.length > 50 ? <p className="movieName text-smaller">{props.movie.title}</p> :  ""*/}
             {/*props.movie.title.length > 30 && props.movie.title.length <= 50 ? <p className="movieName text-small">{props.movie.title}</p> :  ""*/}
             {/*props.movie.title.length <= 30 ? <p className="movieName">{props.movie.title}</p> :  ""*/}
-            <p className="stars">★★★☆☆</p>
-            <p>{props.reviewCount} reviews</p>
+            <p className="stars">☆☆☆☆☆</p> {/* ★ */}
+            <p>{props.reviewCount}0 reviews</p>
         </div>
       <img src={"https://image.tmdb.org/t/p/original/" + props.movie.poster_path } width={167} height={250}></img>
     </div>

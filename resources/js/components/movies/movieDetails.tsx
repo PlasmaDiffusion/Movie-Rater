@@ -16,6 +16,7 @@ function MovieDetails(props: MovieProps){
 
   //Check when this window is visible.
   const [targetRef, visible] = useVisible();
+  var [height, setHeight] = useState("");
 
 
   //Redux state
@@ -27,7 +28,10 @@ function MovieDetails(props: MovieProps){
 
     if (visible)
     {
-      console.log(props.movie);
+      //console.log(props.movie);
+
+      //Make movie details window higher if the description is long
+      setHeight(props.movie.overview.length > 400 ? "90%" : "70%" )
 
       //dispatch(setMovieId(props.movie.id));
       //console.log(getState());
@@ -37,8 +41,8 @@ function MovieDetails(props: MovieProps){
 
     return (
       <div ref={targetRef} className="movieBG scroll">
-        <div className="movieDetails">
-          <button onClick={props.closeOnClick}> X </button>
+        <div className="movieDetails" style={{height: height}}>
+          <button className="close" onClick={props.closeOnClick}> X </button>
           <h2>{props.movie.title}</h2>
           <p>{props.movie.release_date}</p>
           <img src={"https://image.tmdb.org/t/p/original/" + props.movie.poster_path } width={167} height={250}></img>

@@ -2171,12 +2171,13 @@ function MovieCard(props) {
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
     className: "listedMovie",
     key: "movie" + props.id,
-    onClick: openDetailsWindow
+    onClick: openDetailsWindow,
+    id: props.category
   }, react_1["default"].createElement("div", {
     className: "showOnHover"
   }, react_1["default"].createElement("p", {
     className: "stars"
-  }, "\u2605\u2605\u2605\u2606\u2606"), react_1["default"].createElement("p", null, props.reviewCount, " reviews")), react_1["default"].createElement("img", {
+  }, "\u2606\u2606\u2606\u2606\u2606"), " ", react_1["default"].createElement("p", null, props.reviewCount, "0 reviews")), react_1["default"].createElement("img", {
     src: "https://image.tmdb.org/t/p/original/" + props.movie.poster_path,
     width: 167,
     height: 250
@@ -2259,7 +2260,11 @@ function MovieDetails(props) {
   //Check when this window is visible.
   var _a = react_hooks_visible_1.useVisible(),
       targetRef = _a[0],
-      visible = _a[1]; //Redux state
+      visible = _a[1];
+
+  var _b = react_1.useState(""),
+      height = _b[0],
+      setHeight = _b[1]; //Redux state
   //const currentMovieId = useSelector(state => state.movieId);
   //const dispatch = useDispatch();
   //Debug API data on the movie here.
@@ -2267,7 +2272,9 @@ function MovieDetails(props) {
 
   react_1.useEffect(function () {
     if (visible) {
-      console.log(props.movie); //dispatch(setMovieId(props.movie.id));
+      //console.log(props.movie);
+      //Make movie details window higher if the description is long
+      setHeight(props.movie.overview.length > 400 ? "90%" : "70%"); //dispatch(setMovieId(props.movie.id));
       //console.log(getState());
     }
   }, [visible]);
@@ -2275,8 +2282,12 @@ function MovieDetails(props) {
     ref: targetRef,
     className: "movieBG scroll"
   }, react_1["default"].createElement("div", {
-    className: "movieDetails"
+    className: "movieDetails",
+    style: {
+      height: height
+    }
   }, react_1["default"].createElement("button", {
+    className: "close",
     onClick: props.closeOnClick
   }, " X "), react_1["default"].createElement("h2", null, props.movie.title), react_1["default"].createElement("p", null, props.movie.release_date), react_1["default"].createElement("img", {
     src: "https://image.tmdb.org/t/p/original/" + props.movie.poster_path,
@@ -2355,8 +2366,15 @@ __webpack_require__(/*! ./movie.scss */ "./resources/js/components/movies/movie.
 function MovieList(props) {
   var _a = react_1.useState([]),
       movieArray = _a[0],
-      setMovieArray = _a[1]; //var [listDescription, setListDescription] = useState("");
-  //Read in lists of movies
+      setMovieArray = _a[1];
+
+  var _b = react_1.useState(0),
+      scrollTarget = _b[0],
+      setScrollTarget = _b[1];
+
+  var _c = react_1.useState([]),
+      refs = _c[0],
+      setRefs = _c[1]; //Read in lists of movies
 
 
   react_1.useEffect(function () {
@@ -2364,15 +2382,51 @@ function MovieList(props) {
       setMovieArray(res.data.items); //setListDescription(res.data.description);
     });
   }, []);
-  return react_1["default"].createElement("div", null, react_1["default"].createElement("h2", null, props.category), react_1["default"].createElement("div", {
+  react_1.useEffect(function () {}, [movieArray.length]);
+
+  var saveThisRef = function saveThisRef(element) {
+    refs.push(element);
+    setRefs(refs);
+  };
+
+  function onClickScroll(e) {
+    setScrollTarget(scrollTarget + 1);
+    console.log(scrollTarget);
+
+    if (refs[scrollTarget]) {
+      console.log(refs[scrollTarget]);
+      refs[scrollTarget].focus();
+      /*refs[scrollTarget].current.scrollIntoView({
+           behavior: "smooth",
+           block: "nearest"
+        })*/
+    }
+  }
+
+  return react_1["default"].createElement("div", {
+    className: "movieList"
+  }, react_1["default"].createElement("h2", null, props.category), react_1["default"].createElement("div", {
+    className: "movieRow"
+  }, react_1["default"].createElement("button", {
+    onClick: onClickScroll,
+    style: {
+      visibility: "hidden"
+    }
+  }, " - "), react_1["default"].createElement("div", {
     className: "flex-container"
   }, movieArray.map(function (movie, index) {
     return react_1["default"].createElement(movieCard_1["default"], {
       movie: movie,
-      id: index,
+      category: props.category + index,
+      ref: saveThisRef,
       key: props.category + index
     });
-  })));
+  })), react_1["default"].createElement("button", {
+    onClick: onClickScroll,
+    style: {
+      visibility: "hidden"
+    }
+  }, " - ")));
 }
 
 exports.default = MovieList;
@@ -7329,7 +7383,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".listedMovie {\n  background-color: #21004d;\n  border-radius: 12px;\n  margin: auto;\n  margin-left: 2rem;\n  margin-right: 2rem;\n  display: inline-block;\n  margin-bottom: 16px;\n  padding-left: 16px;\n  padding-right: 16px;\n  padding-bottom: 4px;\n  padding-top: 0;\n  background: none;\n}\n.listedMovie p {\n  color: white;\n}\n.listedMovie .movieName {\n  height: 32px;\n}\n.listedMovie img {\n  border-radius: 8px;\n}\n.listedMovie .showOnHover {\n  visibility: hidden;\n}\n\n.text-small {\n  font-size: 11pt;\n}\n\n.text-smaller {\n  font-size: 10pt;\n}\n\n.movieBG,\n.movieDetails {\n  position: fixed;\n  color: white;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #21004d;\n}\n.movieBG h2,\n.movieBG button,\n.movieBG p,\n.movieDetails h2,\n.movieDetails button,\n.movieDetails p {\n  opacity: 1;\n}\n.movieBG button:hover,\n.movieDetails button:hover {\n  background-color: #380180;\n}\n\n.movieDetails {\n  position: relative;\n  margin: auto;\n  margin-top: 1%;\n  width: 50%;\n  height: 70%;\n  background-color: #380180;\n}\n\nbutton {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n  border-color: #380180;\n  border-radius: 4px;\n  outline: #380180;\n}\n\nbutton:hover {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n}\n\n.listedMovie:hover {\n  background: #21004d;\n  -webkit-animation: grow 0.5s forwards;\n          animation: grow 0.5s forwards;\n}\n.listedMovie:hover .showOnHover {\n  visibility: visible;\n  -webkit-animation: fade 0.5s forwards;\n          animation: fade 0.5s forwards;\n}\n\n@-webkit-keyframes fade {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n\n@keyframes fade {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@-webkit-keyframes grow {\n  from {\n    transform: scale(1);\n  }\n  to {\n    transform: scale(1.2);\n  }\n}\n@keyframes grow {\n  from {\n    transform: scale(1);\n  }\n  to {\n    transform: scale(1.2);\n  }\n}\n@media screen and (max-width: 480px) {\n  .listedMovie {\n    width: 128px;\n  }\n  .listedMovie img {\n    width: 128px;\n    height: 128px;\n  }\n  .listedMovie p {\n    overflow-wrap: normal;\n    margin-top: 1px;\n    margin-bottom: 1px;\n    overflow: visible;\n    text-overflow: ellipsis;\n  }\n  .listedMovie .movieName {\n    height: 48px;\n  }\n\n  .text-small {\n    font-size: 10pt;\n  }\n\n  .text-smaller {\n    font-size: 8.8pt;\n  }\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".listedMovie {\n  background-color: #21004d;\n  border-radius: 12px;\n  margin: auto;\n  margin-left: 2rem;\n  margin-right: 2rem;\n  display: inline-block;\n  margin-bottom: 16px;\n  padding-left: 16px;\n  padding-right: 16px;\n  padding-bottom: 4px;\n  padding-top: 0;\n  background: none;\n}\n.listedMovie p {\n  color: white;\n}\n.listedMovie .movieName {\n  height: 32px;\n}\n.listedMovie img {\n  border-radius: 8px;\n}\n.listedMovie .showOnHover {\n  visibility: hidden;\n}\n\n.text-small {\n  font-size: 11pt;\n}\n\n.text-smaller {\n  font-size: 10pt;\n}\n\n.movieBG,\n.movieDetails {\n  position: fixed;\n  color: white;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #21004d;\n  -webkit-animation: fade 0.5s forwards;\n          animation: fade 0.5s forwards;\n}\n.movieBG h2,\n.movieBG button,\n.movieBG p,\n.movieDetails h2,\n.movieDetails button,\n.movieDetails p {\n  opacity: 1;\n}\n\n.movieDetails {\n  position: relative;\n  margin: auto;\n  margin-top: 1%;\n  width: 50%;\n  background-color: #380180;\n  border-radius: 12px;\n}\n\nbutton {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n  border-color: #380180;\n  border-radius: 4px;\n  outline: #380180;\n}\n\nbutton:hover {\n  font-size: 1.5rem;\n  background-color: #21004d;\n  color: white;\n}\n\n.listedMovie:hover {\n  background: #21004d;\n  -webkit-animation: grow 0.5s forwards;\n          animation: grow 0.5s forwards;\n}\n.listedMovie:hover .showOnHover {\n  visibility: visible;\n  -webkit-animation: fade 0.5s forwards;\n          animation: fade 0.5s forwards;\n}\n\n.movieRow {\n  display: flex;\n}\n.movieRow button {\n  display: block;\n  position: relative;\n  height: 400px;\n  width: 128px;\n}\n.movieRow button:first {\n  margin-left: 100px;\n}\n\n.close {\n  margin-left: 90%;\n  height: 32px !important;\n  width: 64px !important;\n}\n\n.close:hover {\n  background-color: #380180;\n}\n\n@-webkit-keyframes fade {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n\n@keyframes fade {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n@-webkit-keyframes grow {\n  from {\n    transform: scale(1);\n  }\n  to {\n    transform: scale(1.2);\n  }\n}\n@keyframes grow {\n  from {\n    transform: scale(1);\n  }\n  to {\n    transform: scale(1.2);\n  }\n}\n@media screen and (max-width: 480px) {\n  .listedMovie {\n    width: 128px;\n  }\n  .listedMovie img {\n    width: 128px;\n    height: 128px;\n  }\n  .listedMovie p {\n    overflow-wrap: normal;\n    margin-top: 1px;\n    margin-bottom: 1px;\n    overflow: visible;\n    text-overflow: ellipsis;\n  }\n  .listedMovie .movieName {\n    height: 48px;\n  }\n\n  .text-small {\n    font-size: 10pt;\n  }\n\n  .text-smaller {\n    font-size: 8.8pt;\n  }\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
