@@ -40,7 +40,7 @@ function MovieDetails(props: MovieProps){
   }, [visible])
 
     return (
-      <div ref={targetRef} className="movieBG scroll">
+      <div /*ref={targetRef}*/ className="movieBG scroll">
         <div className="movieDetails" style={{height: height}}>
           <button className="close" onClick={props.closeOnClick}> X </button>
           <h2>{props.movie.title}</h2>

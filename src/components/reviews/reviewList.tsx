@@ -58,7 +58,7 @@ function ReviewList(props: ReviewProps)
 
 
  return(
-     <div ref={targetRef}>
+     <div /*ref={targetRef}*/>
         <h2>Average Score: {aveScore}</h2>
          <div className="reviewList">
          { //Display all 

@@ -13,7 +13,7 @@ function MovieList(props: ListProps){
     var [movieArray, setMovieArray] = useState([]);
     var [scrollTarget, setScrollTarget] = useState(0);
 
-    var [refs, setRefs] = useState([]);
+    var [refs, setRefs] = useState<any[]>([]);
     
 
 
@@ -32,12 +32,12 @@ function MovieList(props: ListProps){
         }, [movieArray.length]);
       
 
-        const saveThisRef = (element) => {
+        const saveThisRef = (element : any) => {
           refs.push(element);
           setRefs(refs);
         }
 
-      function onClickScroll(e){
+      function onClickScroll(e: any){
 
         setScrollTarget(scrollTarget+1);
         console.log(scrollTarget);
@@ -63,7 +63,7 @@ function MovieList(props: ListProps){
           <button onClick={onClickScroll} style={{visibility: "hidden"}}> - </button>
         <div className="flex-container" >
             {movieArray.map((movie, index) => (
-              <MovieCard movie={movie} category={props.category + index} ref={saveThisRef} key={props.category + index} />
+              <MovieCard movie={movie} category={props.category + index} /*ref={saveThisRef}*/ key={props.category + index} reviewCount={0} average={0} />
             ))}
         </div>
         <button onClick={onClickScroll} style={{visibility: "hidden"}}> - </button>
