@@ -38,12 +38,18 @@ const ReviewType = new GraphQLObjectType({
     name: 'Review',
     fields: () => ({
         id: {type: GraphQLID},
-        name: {type: GraphQLString},
+        text: {type: GraphQLString},
         score:{type: GraphQLInt},
         user: {
             type: UserType,
             resolve(parent, args){
                 return User.findById(parent.userId);
+            }
+        },
+        movie: {
+            type: MovieType,
+            resolve(parent, args){
+                return Movie.findById(parent.movieId);
             }
         }
     })
@@ -75,10 +81,13 @@ const RootQuery = new GraphQLObjectType({
 
                 //Calculate average score of movie
                 let totalScore =0;
+                if (movie.reviews)
+                {
                 movie.reviews.forEach(review => {
                     totalScore+= review.score;
                 });
                 movie.averageScore = totalScore / moveBy.reviews.length;
+                }
 
                 return movie;
             }
@@ -127,6 +136,7 @@ const Mutation = new GraphQLObjectType({
                     genre: args.genre,
                     averageScore: 0,
                 });
+                console.log(movie);
                 return movie.save();
         }
         },
@@ -135,13 +145,13 @@ const Mutation = new GraphQLObjectType({
             args: {
                 userId: {type: new GraphQLNonNull(GraphQLString)},
                 movieId: {type: new GraphQLNonNull(GraphQLString)},
-                text: {type: new GraphQLNonNull(GraphQLID)},
+                text: {type: new GraphQLNonNull(GraphQLString)},
                 score: {type: new GraphQLNonNull(GraphQLID)},
             },
             resolve(parent, args){
                 let review = new Review({
                     userId: args.userId,
-                    movieId: args.id,
+                    movieId: args.movieId,
                     text: args.text,
                     score: args.score,
                 });
@@ -157,7 +167,7 @@ const Mutation = new GraphQLObjectType({
             resolve(parent, args){
                 let user = new User({
                     email: args.email,
-                    username: args.name,
+                    username: args.username,
                 });
                 return user.save();
         }

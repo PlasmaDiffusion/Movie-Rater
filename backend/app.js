@@ -12,7 +12,7 @@ app.use(cors());
 const uri =
   "mongodb+srv://admin:" +
   process.env.PASSWORD +
-  "@cluster0-qjfez.mongodb.net/graphql_test?retryWrites=true&w=majority";
+  "@cluster0-qjfez.mongodb.net/movie-rater?retryWrites=true&w=majority";
 const connection = mongoose.connection;
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
