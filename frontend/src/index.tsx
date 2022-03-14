@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import MovieList from "./components/movies/movieList";
+import ServerTest from "./components/serverTest";
+
 import {
     ApolloClient,
     InMemoryCache,
@@ -9,7 +11,7 @@ import {
 import "./app.scss";
 
 const client = new ApolloClient({
-    //uri: 'http://localhost:4000/graphql',
+    uri: 'http://localhost:4000/graphql',
     cache: new InMemoryCache()
   });
 
@@ -25,10 +27,10 @@ class App extends Component {
                     <MovieList id={54} category={"Japanese Animated Films"} />
                 </div>
                 <div style={{ margin: "20px" }}>
-                    {/*
-                    <ServerAPI_Test />
-                    <ReduxTest />
-                    */}
+                    
+                    <ServerTest/>
+                    
+                    
                 </div>
 
                 <footer>

@@ -1,18 +1,34 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
+import {getReviews, getBooksQuery, getMovieReviewPreviewQuery, getMovieReviewPreviewQuery2} from "../queries/queries";
+import { useQuery } from "@apollo/client";
 
-function ServerAPI_Test(props){
+function ServerTest(){
 
     var [movieArray, setMovieArray] = useState([]);
 
-    useEffect(() => {
+
+
+    
+    const { loading, error, data } =  useQuery(getReviews);
+
+    console.log(error);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error</p>;
+
+    console.log(data);
+
+    return <div></div>;
+
+    /*useEffect(() => {
         axios.get("api/movies")
         .then(res => {
           //setMovieArray(res.data.items);
             console.log("Movies in DB", res.data);
             console.log("Movies in DB", res.data[0]);
 
-        })}, []);
+        })}, []); 
 
 
         return(<React.Fragment>
@@ -23,8 +39,8 @@ function ServerAPI_Test(props){
             </div>
         ))}
         </React.Fragment>
-        );
+        ); */
 
 }
 
-export default ServerAPI_Test;
+export default ServerTest;

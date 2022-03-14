@@ -1,6 +1,9 @@
 
+import { useQuery } from '@apollo/client';
 import React, { useState, useEffect } from 'react';
+import { useVisible } from 'react-hooks-visible';
 import MovieDetails from './movieDetails';
+import MovieReviewPreview from './movieReviewPreview';
 
 //MovieProps will be used both by this and movie details
 export interface MovieProps  {
@@ -16,18 +19,17 @@ export interface MovieProps  {
     closeOnClick?: ()=>void;
 }
 
-//Extra props for this component only
-interface CardProps extends MovieProps{
-    reviewCount: number;
-    average: number;
-    category: string;
-}
-
 
 //A card that shows the movie title, star rating, review count and poster. When clicked this will show its child, MovieDetails.
-function MovieCard(props: CardProps){
+function MovieCard(props: MovieProps){
 
     var [movieSelected, setMovieSelected] = useState(false);
+    const [loadedPreview, setLoadedPreview] = useState(false);
+    const [targetRef, visible] = useVisible()
+
+    
+
+ 
     
     function openDetailsWindow()
     {
@@ -46,13 +48,14 @@ function MovieCard(props: CardProps){
     }
 
 return(<React.Fragment>
-    <div className="listedMovie" key={"movie" + props.id} onClick={openDetailsWindow} id={props.category}>
-        <div className="showOnHover">
+    <div className="listedMovie" key={"movie" + props.id} onClick={openDetailsWindow} >
+        {/* @ts-expect-error: Ignore ref error */}
+        <div className="showOnHover" ref={targetRef}>
             {/*props.movie.title.length > 50 ? <p className="movieName text-smaller">{props.movie.title}</p> :  ""*/}
             {/*props.movie.title.length > 30 && props.movie.title.length <= 50 ? <p className="movieName text-small">{props.movie.title}</p> :  ""*/}
             {/*props.movie.title.length <= 30 ? <p className="movieName">{props.movie.title}</p> :  ""*/}
-            <p className="stars">☆☆☆☆☆</p> {/* ★ */}
-            <p>{props.reviewCount} reviews</p>
+            {/*visible && (<MovieReviewPreview movieName={props.movie.title} />)*/}
+
         </div>
       <img src={"https://image.tmdb.org/t/p/original/" + props.movie.poster_path } width={167} height={250}></img>
     </div>

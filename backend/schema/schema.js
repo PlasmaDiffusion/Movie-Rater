@@ -99,7 +99,7 @@ const RootQuery = new GraphQLObjectType({
                 return User.findById(args.id);
             }
         },
-        reviews: {
+        movies: {
             type: new GraphQLList(MovieType),
             resolve(parent,args){
                 return Movie.find(averageScore > 0);

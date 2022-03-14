@@ -63,7 +63,7 @@ function MovieList(props: ListProps){
           <button onClick={onClickScroll} style={{visibility: "hidden"}}> - </button>
         <div className="flex-container" >
             {movieArray.map((movie, index) => (
-              <MovieCard movie={movie} category={props.category + index} /*ref={saveThisRef}*/ key={props.category + index} reviewCount={0} average={0} />
+              <MovieCard movie={movie}  /*ref={saveThisRef}*/ key={props.category + index} />
             ))}
         </div>
         <button onClick={onClickScroll} style={{visibility: "hidden"}}> - </button>
