@@ -16,7 +16,7 @@ import {
         }
     }
 }
-`
+`*/
 
 export const getMovieReviewPreviewQuery = gql`
 query($id: ID){
@@ -26,16 +26,9 @@ query($id: ID){
 }
 `
 
-export const getMovieReviewPreviewQuery2 = gql`
-{
-    movie(id:"622bbcf55ff9c65c6763d89e") {
-        averageScore
-    }
-}
-`*/
 
 const getReviews = gql`
-{
+query{
     reviews {
         text
         score

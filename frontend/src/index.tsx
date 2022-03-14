@@ -27,10 +27,7 @@ class App extends Component {
                     <MovieList id={54} category={"Japanese Animated Films"} />
                 </div>
                 <div style={{ margin: "20px" }}>
-                    
-                    <ServerTest/>
-                    
-                    
+                    {/*<ServerTest/>*/}
                 </div>
 
                 <footer>

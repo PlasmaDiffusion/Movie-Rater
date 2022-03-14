@@ -20,14 +20,12 @@ export interface MovieProps  {
 }
 
 
-//A card that shows the movie title, star rating, review count and poster. When clicked this will show its child, MovieDetails.
+// A card that shows the movie title and poster, plus the star rating and review count when hovered over.
+// When clicked this will show its child, MovieDetails.
 function MovieCard(props: MovieProps){
 
     var [movieSelected, setMovieSelected] = useState(false);
     const [loadedPreview, setLoadedPreview] = useState(false);
-    const [targetRef, visible] = useVisible()
-
-    
 
  
     
@@ -47,14 +45,18 @@ function MovieCard(props: MovieProps){
         document.body.style.overflow = "auto";
     }
 
+    function preparePreviewOnHover()
+    {
+        if(!loadedPreview) setLoadedPreview(true)
+    }
+
 return(<React.Fragment>
-    <div className="listedMovie" key={"movie" + props.id} onClick={openDetailsWindow} >
-        {/* @ts-expect-error: Ignore ref error */}
-        <div className="showOnHover" ref={targetRef}>
+    <div className="listedMovie" key={"movie" + props.id} onClick={openDetailsWindow} onTouchStart={preparePreviewOnHover} onMouseOver={preparePreviewOnHover} >
+        <div className="showOnHover" >
             {/*props.movie.title.length > 50 ? <p className="movieName text-smaller">{props.movie.title}</p> :  ""*/}
             {/*props.movie.title.length > 30 && props.movie.title.length <= 50 ? <p className="movieName text-small">{props.movie.title}</p> :  ""*/}
             {/*props.movie.title.length <= 30 ? <p className="movieName">{props.movie.title}</p> :  ""*/}
-            {/*visible && (<MovieReviewPreview movieName={props.movie.title} />)*/}
+            {loadedPreview && (<MovieReviewPreview movieName={props.movie.title} />)}
 
         </div>
       <img src={"https://image.tmdb.org/t/p/original/" + props.movie.poster_path } width={167} height={250}></img>

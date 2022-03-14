@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
-import {getMovieReviewPreviewQuery, getMovieReviewPreviewQuery2, getReviews} from "../../queries/queries";
-
+import {getMovieReviewPreviewQuery} from "./../../queries/queries";
 
 interface Props {
     movieName: string;
@@ -17,14 +16,25 @@ function MovieReviewPreview({movieName} : Props)
     const [averageScore, setAverageScore] = useState(0);
 
 
-    const { loading, error, data } =  useQuery(getReviews);
 
+    const { loading, error, data } =  useQuery(getMovieReviewPreviewQuery, {
+        variables: {id:"622bbcf55ff9c65c6763d89e"}
+    });
+
+    if (data)
+    {
+        console.log(data);
+        if(data.movie.averageScore) setAverageScore(data.movie.averageScore )
+    
+        if (data.movie.reviews)setReviewCount(data.movie.reviews.length);
+      
+    }
 
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error</p>;
 
-    console.log(data);
+    console.log(movieName, data);
 
 return(<React.Fragment>
     <div key={"movie" + movieName} >

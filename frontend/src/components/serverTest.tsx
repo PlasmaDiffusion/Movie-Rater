@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import {getReviews, getBooksQuery, getMovieReviewPreviewQuery, getMovieReviewPreviewQuery2} from "../queries/queries";
+import {getReviews, getBooksQuery} from "../queries/queries";
 import { useQuery } from "@apollo/client";
 
 function ServerTest(){
