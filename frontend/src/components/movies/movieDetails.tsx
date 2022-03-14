@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useVisible } from 'react-hooks-visible'
+import {getMovieReviewsQuery} from "./../../queries/queries";
+import { useQuery } from "@apollo/client";
 
 
 //import {useSelector, useDispatch} from 'react-redux';
@@ -19,6 +21,9 @@ function MovieDetails(props: MovieProps){
   var [height, setHeight] = useState("");
 
 
+  const { loading, error, data } =  useQuery(getMovieReviewsQuery, {
+    variables: {id:"622bbcf55ff9c65c6763d89e"}
+  });
   //Redux state
   //const currentMovieId = useSelector(state => state.movieId);
   //const dispatch = useDispatch();
@@ -40,7 +45,8 @@ function MovieDetails(props: MovieProps){
   }, [visible])
 
     return (
-      <div /*ref={targetRef}*/ className="movieBG scroll">
+      //@ts-ignore: Ignore ref error
+      <div ref={targetRef} className="movieBG scroll">
         <div className="movieDetails" style={{height: height}}>
           <button className="close" onClick={props.closeOnClick}> X </button>
           <h2>{props.movie.title}</h2>

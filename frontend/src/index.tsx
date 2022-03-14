@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import MovieList from "./components/movies/movieList";
-import ServerTest from "./components/serverTest";
 
 import {
     ApolloClient,

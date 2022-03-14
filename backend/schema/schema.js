@@ -77,17 +77,19 @@ const RootQuery = new GraphQLObjectType({
             type:MovieType,
             args: {id:{type: GraphQLID}},
             resolve(parent, args){
-                const movie = Movie.findById(args.id);
+                let movie = Movie.findById(args.id);
 
                 //Calculate average score of movie
                 let totalScore =0;
+                console.log(movie.reviews);
                 if (movie.reviews)
                 {
                 movie.reviews.forEach(review => {
                     totalScore+= review.score;
                 });
-                movie.averageScore = totalScore / moveBy.reviews.length;
+                movie.averageScore = totalScore / movie.reviews.length;
                 }
+                else {console.log("No reviews")}
 
                 return movie;
             }

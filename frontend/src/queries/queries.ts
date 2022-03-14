@@ -22,10 +22,25 @@ export const getMovieReviewPreviewQuery = gql`
 query($id: ID){
     movie(id:$id) {
         averageScore
+        reviews {
+            score
+        }
     }
 }
 `
 
+export const getMovieReviewsQuery = gql`
+query($id: ID){
+    movie(id:$id) {
+        averageScore
+        reviews {
+            score
+            text
+            
+        }
+    }
+}
+`
 
 const getReviews = gql`
 query{
@@ -54,5 +69,3 @@ const getBooksQuery = gql`
     }
 }
 `
-
-export {getReviews, getBooksQuery};

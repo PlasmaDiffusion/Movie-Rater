@@ -1,5 +1,5 @@
-import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import { useQuery } from "@apollo/client";
 import {getMovieReviewPreviewQuery} from "./../../queries/queries";
 
 interface Props {
@@ -12,8 +12,8 @@ interface Props {
 function MovieReviewPreview({movieName} : Props)
 {
 
-    const [reviewCount, setReviewCount] = useState(0);
-    const [averageScore, setAverageScore] = useState(0);
+    const [reviewCount, setReviewCount] = useState(-1);
+    const [averageScore, setAverageScore] = useState("☆☆☆☆☆");
 
 
 
@@ -24,9 +24,18 @@ function MovieReviewPreview({movieName} : Props)
     if (data)
     {
         console.log(data);
-        if(data.movie.averageScore) setAverageScore(data.movie.averageScore )
+        if(data.movie.averageScore && averageScore === "☆☆☆☆☆")
+        {
+            let starString = "";
+            for(let i = 0; i < 5; i++)
+            {
+                if (data.movie.averageScore > i) starString +="★";
+                else starString += "☆";
+            }
+            setAverageScore(starString)
+        }
     
-        if (data.movie.reviews)setReviewCount(data.movie.reviews.length);
+        if (data.movie.reviews && reviewCount === -1 ) setReviewCount(data.movie.reviews.length);
       
     }
 
@@ -41,8 +50,11 @@ return(<React.Fragment>
             {/*props.movie.title.length > 50 ? <p className="movieName text-smaller">{props.movie.title}</p> :  ""*/}
             {/*props.movie.title.length > 30 && props.movie.title.length <= 50 ? <p className="movieName text-small">{props.movie.title}</p> :  ""*/}
             {/*props.movie.title.length <= 30 ? <p className="movieName">{props.movie.title}</p> :  ""*/}
-            <p className="stars">☆☆☆☆☆</p> {/* ★ */}
-            <p>{reviewCount} reviews</p>
+            <p className="stars">{averageScore}</p> {/* ★ */}
+            {reviewCount === -1 && (<p> 0 reviews</p>)} 
+            {reviewCount === 1 && (<p> 1 review</p>)}
+            {(reviewCount === 0 || reviewCount > 1) && (<p>{reviewCount} reviews</p>)} 
+
     </div>
 </React.Fragment>);
 
