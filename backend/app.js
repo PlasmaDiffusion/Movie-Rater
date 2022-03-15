@@ -7,7 +7,11 @@ require('dotenv').config();
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+}
+app.use(cors(corsOptions));
 
 const uri =
   "mongodb+srv://admin:" +
