@@ -6,6 +6,9 @@ import "./review.scss";
 
 
 import axios from 'axios';
+import { useQuery } from '@apollo/client';
+import { getMovieReviewsQuery } from '../../queries/queries';
+import { getAverageScore } from '../../helper/calculations';
 
 
 export interface ReviewProps{
@@ -20,10 +23,6 @@ export interface ReviewProps{
 //Get all reviews for the particular movie, and list them. Also have a form to submit a review at the bottom.
 function ReviewList(props: ReviewProps)
 {
-
-
-
-
   //Check when this window is visible.
   const [targetRef, visible] = useVisible();
 
@@ -31,6 +30,22 @@ function ReviewList(props: ReviewProps)
   const [aveScore, setAveScore] = useState(0);
   const [reviewsLoaded, setReviewsLoaded] = useState(false);
 
+  const { loading, error, data } =  useQuery(getMovieReviewsQuery, {
+    variables: {id:"622bbcf55ff9c65c6763d89e"}
+  });
+
+  if (data && !reviewsLoaded)
+  {
+    console.log(data);
+    if(data.movie.reviews)
+    {
+      setReviews(data.movie.reviews);
+      setAveScore(getAverageScore(data.movie));
+      setReviewsLoaded(true);
+    }
+    
+  }
+  
   useEffect(() => {
 
     //Try to load in reviews from the database once this component is visible.
@@ -49,7 +64,6 @@ function ReviewList(props: ReviewProps)
           setAveScore(res.data.averageScore);
           }
           setReviewsLoaded(true);
-
       })
 
     }
@@ -72,7 +86,7 @@ function ReviewList(props: ReviewProps)
          <p style={{textAlign:"center"}}>{ //Loading reviews...
          !reviewsLoaded ? "Checking for reviews..." : ""}</p>
          <p style={{textAlign:"center"}}>{ //Mention if there aren't any reviews for this movie yet.
-         reviews.length == 0 && reviewsLoaded ? "No reviews yet for this movie." : ""}</p>
+         reviews.length === 0 && reviewsLoaded ? "No reviews yet for this movie." : ""}</p>
          
          <br></br><br></br>
          <ReviewForm movieTitle={props.movieTitle} />

@@ -22,7 +22,7 @@ class App extends Component {
                 <div>
                     <MovieList id={1} category={"Marvel"} />
                     <MovieList id={3} category={"DC"} />
-                    <MovieList id={10} category={"Top Grossing Films (2012)"} />
+                    <MovieList id={10} category={"Top Grossing Films (as of 2012)"} />
                     <MovieList id={54} category={"Japanese Animated Films"} />
                 </div>
                 <div style={{ margin: "20px" }}>
