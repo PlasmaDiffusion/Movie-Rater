@@ -9,8 +9,9 @@ import {
   } from "@apollo/client";
 import "./app.scss";
 
+
 const client = new ApolloClient({
-    uri: 'http://localhost:4000/graphql',
+    uri: process.env.REACT_APP_DATABASE_URL,
     cache: new InMemoryCache()
   });
 
