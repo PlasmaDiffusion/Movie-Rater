@@ -7,11 +7,7 @@ require('dotenv').config();
 const cors = require("cors");
 
 const app = express();
-var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-}
-app.use(cors(corsOptions));
+app.use(cors());
 
 const uri =
   "mongodb+srv://admin:" +
@@ -25,6 +21,11 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 connection.once("open", function () {
   console.log("MongoDB database connection established successfully");
+});
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
 });
 
 app.use('/graphql', graphqlHTTP({
