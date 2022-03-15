@@ -24,6 +24,7 @@ connection.once("open", function () {
 });
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -33,6 +34,6 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-app.listen(4000, ()=>{
+app.listen(process.env.PORT || 4000, ()=>{
     console.log('now listening for requests on port 4000')
 });
