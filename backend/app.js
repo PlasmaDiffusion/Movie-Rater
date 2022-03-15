@@ -22,9 +22,9 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 connection.once("open", function () {
   console.log("MongoDB database connection established successfully");
 });
-
-app.use((req, res, next) => {
+app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
