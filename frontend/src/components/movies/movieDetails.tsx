@@ -21,9 +21,6 @@ function MovieDetails(props: MovieProps){
   var [height, setHeight] = useState("");
 
 
-  const { loading, error, data } =  useQuery(getMovieReviewsQuery, {
-    variables: {id:"622bbcf55ff9c65c6763d89e"}
-  });
   //Redux state
   //const currentMovieId = useSelector(state => state.movieId);
   //const dispatch = useDispatch();
@@ -33,7 +30,7 @@ function MovieDetails(props: MovieProps){
 
     if (visible)
     {
-      //console.log(props.movie);
+      console.log(props.movie);
 
       //Make movie details window higher if the description is long
       setHeight(props.movie.overview.length > 400 ? "90%" : "70%" )
@@ -54,7 +51,8 @@ function MovieDetails(props: MovieProps){
           <img src={"https://image.tmdb.org/t/p/original/" + props.movie.poster_path } width={167} height={250}></img>
           <p>{props.movie.overview}</p>
         </div>
-        <ReviewList movieTitle={props.movie.title} />
+        
+        {visible && <ReviewList movieTitle={props.movie.title}/>} 
       </div>
     );
 }

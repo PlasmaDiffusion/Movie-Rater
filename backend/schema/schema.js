@@ -38,7 +38,7 @@ const ReviewType = new GraphQLObjectType({
     name: 'Review',
     fields: () => ({
         id: {type: GraphQLID},
-        text: {type: GraphQLString},
+        comment: {type: GraphQLString},
         score:{type: GraphQLInt},
         user: {
             type: UserType,
@@ -75,9 +75,9 @@ const RootQuery = new GraphQLObjectType({
     fields:{
         movie: {
             type:MovieType,
-            args: {id:{type: GraphQLID}},
+            args: {name:{type: GraphQLString}},
             resolve(parent, args){
-                let movie = Movie.findById(args.id);
+                let movie = Movie.findOne({name: args.name});
 
                 //Calculate average score of movie
                 let totalScore =0;
@@ -147,14 +147,14 @@ const Mutation = new GraphQLObjectType({
             args: {
                 userId: {type: new GraphQLNonNull(GraphQLString)},
                 movieId: {type: new GraphQLNonNull(GraphQLString)},
-                text: {type: new GraphQLNonNull(GraphQLString)},
+                comment: {type: new GraphQLNonNull(GraphQLString)},
                 score: {type: new GraphQLNonNull(GraphQLID)},
             },
             resolve(parent, args){
                 let review = new Review({
                     userId: args.userId,
                     movieId: args.movieId,
-                    text: args.text,
+                    comment: args.comment,
                     score: args.score,
                 });
                 return review.save();

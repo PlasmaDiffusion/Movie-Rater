@@ -6,8 +6,8 @@ import "./review.scss";
 
 
 import axios from 'axios';
-import { useQuery } from '@apollo/client';
-import { getMovieReviewsQuery } from '../../queries/queries';
+import { useMutation, useQuery } from '@apollo/client';
+import { addMovie, getMovieReviewsQuery } from '../../queries/queries';
 import { getAverageScore } from '../../helper/calculations';
 
 
@@ -31,12 +31,17 @@ function ReviewList(props: ReviewProps)
   const [reviewsLoaded, setReviewsLoaded] = useState(false);
 
   const { loading, error, data } =  useQuery(getMovieReviewsQuery, {
-    variables: {id:"622bbcf55ff9c65c6763d89e"}
+    variables: {name:"Le Movie"}
   });
+
+  const [addMovieMutation] = useMutation(addMovie, {
+  });
+
+
 
   if (data && !reviewsLoaded)
   {
-    console.log(data);
+    console.log("data:", data);
     if(data.movie.reviews)
     {
       setReviews(data.movie.reviews);
@@ -45,8 +50,12 @@ function ReviewList(props: ReviewProps)
     }
     
   }
+  else
+  {
+    console.log("Eh");
+  }
   
-  useEffect(() => {
+  /*useEffect(() => {
 
     //Try to load in reviews from the database once this component is visible.
     if (visible && !reviewsLoaded)
@@ -68,7 +77,7 @@ function ReviewList(props: ReviewProps)
 
     }
 
-  }, [visible])
+  }, [visible])*/
 
 
  return(

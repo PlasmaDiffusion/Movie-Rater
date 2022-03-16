@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
-import axios from 'axios';
-
+import { useMutation } from "@apollo/client";
+import { addReview} from "./../../queries/queries";
 import {ReviewProps} from "./reviewList";
+import { getMovieReviewsQuery } from '../../queries/queries';
 
 //The form to submit a review at the bottom of the page.
 function ReviewForm(props: ReviewProps)
@@ -12,35 +12,27 @@ function ReviewForm(props: ReviewProps)
     const [reviewerName, setName] = useState("");
     const [score, setScore] = useState(3);
     const [comment, setComment] = useState("");
-
-
+        
+    const [addReviewMutation, { error, data }] = useMutation(addReview);
+    
     //OnChange event would be this, but laravel doesn't seem to like the post request axios gives :/
-    function submitReview()
+    function submitReview(e: React.FormEvent<HTMLInputElement>)
     {
+        e.preventDefault();
 
+        let data = {
+            reviewerName:reviewerName,
+            movieName:props.movieTitle,
+            score:score,
+            comment:comment}
+            console.log(data);    
 
+        addReviewMutation({variables: {movieId:"",userId:"", score, comment}});
         /*let data = {movie_id:7,
         reviewerName:"Ralph",
         score:"2",
         comment: "Villain was weird"}*/
 
-        let data = {
-        reviewerName:reviewerName,
-        movieName:props.movieTitle,
-        score:score,
-        comment:comment}
-
-        console.log(data);
-        alert(data);
-        
-        axios.post("api/review", data)
-        .then(res => {
-            console.log(res.data);
-            alert("Submitted");
-        })
-
-        
-    
     }
 
     //Click a star and update the score. The render part below will take care of the star output.
@@ -57,7 +49,7 @@ function ReviewForm(props: ReviewProps)
          <h1>Submit A Review</h1>
 
         {/*<form method="POST" onSubmit={submitReview}>*/}
-        <form method="POST" action="api/review">
+        <form method="POST" onSubmit={(e : any)=>{submitReview(e)}}>
             <label >Username </label><br></br>
             <input name="reviewerName" type="text" placeholder="Your name here..." onChange={(e: React.FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}></input><br></br><br></br>
             <label>Reviewing </label><br></br>
@@ -90,8 +82,7 @@ function ReviewForm(props: ReviewProps)
             <textarea name="comment" rows={4} cols={50} placeholder="Your review here..."></textarea>
             
             <br></br><br></br>
-
-             <input type="submit" />
+             <input type="submit" value={data ? "Submitted" :"Submit"} />
          </form>
 
      </div>

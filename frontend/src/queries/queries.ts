@@ -19,8 +19,8 @@ import {
 `*/
 
 export const getMovieReviewPreviewQuery = gql`
-query($id: ID){
-    movie(id:$id) {
+query($name: String){
+    movie(name:$name) {
         averageScore
         reviews {
             score
@@ -30,19 +30,18 @@ query($id: ID){
 `
 
 export const getMovieReviewsQuery = gql`
-query($id: ID){
-    movie(id:$id) {
+query($name: String){
+    movie(name:$name) {
         averageScore
         reviews {
             score
-            text
-            
+            comment            
         }
     }
 }
 `
 
-const getReviews = gql`
+export const getReviews = gql`
 query{
     reviews {
         text
@@ -52,8 +51,8 @@ query{
 `
 
 
-const addMovie = gql`
-mutation AddMovie($name: String!, $genre: String!) {
+export const addMovie = gql`
+mutation AddMovie($name: String!, $genre: String) {
     addBook(name: $name, genre: $genre) {
       id
       name
@@ -61,11 +60,12 @@ mutation AddMovie($name: String!, $genre: String!) {
   }
 `
 
-const getBooksQuery = gql`
-{
-    books {
-        name
-        id
+
+export const addReview = gql`
+mutation AddReview($userId: String!, $movieId: String!, $score: Int!, $text: String!) {
+    addMovie(userId: $userId, movieId: $movieId, score: $score, text: $text, ) {
+      text
+      score
     }
-}
+  }
 `

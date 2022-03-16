@@ -18,9 +18,8 @@ function MovieReviewPreview({movieName} : Props)
 
 
     const { loading, error, data } =  useQuery(getMovieReviewPreviewQuery, {
-        variables: {id:"622bbcf55ff9c65c6763d89e"}
+        variables: {name:"Le Movie"}
     });
-
     if (data)
     {
         const movie = data.movie
