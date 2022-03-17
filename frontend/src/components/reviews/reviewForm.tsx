@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, TextareaHTMLAttributes } from 'react';
 import { useMutation } from "@apollo/client";
 import { addReview} from "./../../queries/queries";
 import {ReviewProps} from "./reviewList";
 import { getMovieReviewsQuery } from '../../queries/queries';
 
+interface Props extends ReviewProps{
+    movieId: string;
+}
+
 //The form to submit a review at the bottom of the page.
-function ReviewForm(props: ReviewProps)
+function ReviewForm({movieTitle, movieId}: Props)
 {
 
     //States the froms would change
@@ -22,16 +26,12 @@ function ReviewForm(props: ReviewProps)
 
         let data = {
             reviewerName:reviewerName,
-            movieName:props.movieTitle,
+            movieName:movieTitle,
             score:score,
             comment:comment}
-            console.log(data);    
+        console.log(data);    
 
-        addReviewMutation({variables: {movieId:"",userId:"", score, comment}});
-        /*let data = {movie_id:7,
-        reviewerName:"Ralph",
-        score:"2",
-        comment: "Villain was weird"}*/
+        addReviewMutation({variables: {movieId, userId:"622bc939c623a2fd556c9fda", score, comment}});
 
     }
 
@@ -53,7 +53,7 @@ function ReviewForm(props: ReviewProps)
             <label >Username </label><br></br>
             <input name="reviewerName" type="text" placeholder="Your name here..." onChange={(e: React.FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}></input><br></br><br></br>
             <label>Reviewing </label><br></br>
-            <input readOnly = {true} type="text" id="movie" name="movieName" value={props.movieTitle} ></input>
+            <input readOnly = {true} type="text" id="movie" name="movieName" value={movieTitle} ></input>
 
             <div>
                 <br></br><br></br>
@@ -79,7 +79,7 @@ function ReviewForm(props: ReviewProps)
 
             <br></br>
 
-            <textarea name="comment" rows={4} cols={50} placeholder="Your review here..."></textarea>
+            <textarea name="comment" onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setComment(e.currentTarget.value)} rows={4} cols={50} placeholder="Your review here..."></textarea>
             
             <br></br><br></br>
              <input type="submit" value={data ? "Submitted" :"Submit"} />

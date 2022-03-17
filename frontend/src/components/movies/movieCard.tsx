@@ -1,4 +1,3 @@
-
 import { useQuery } from '@apollo/client';
 import React, { useState, useEffect } from 'react';
 import { useVisible } from 'react-hooks-visible';
@@ -12,7 +11,7 @@ export interface MovieProps  {
     movie: {
         title: string;
         poster_path: string;
-
+        genre_ids: number[];
         release_date: string;
         overview: string;
     }

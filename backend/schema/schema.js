@@ -133,12 +133,12 @@ const Mutation = new GraphQLObjectType({
                 genre: {type: GraphQLString}
             },
             resolve(parent, args){
+
                 let movie = new Movie({
                     name: args.name,
                     genre: args.genre,
                     averageScore: 0,
                 });
-                console.log(movie);
                 return movie.save();
         }
         },
@@ -148,7 +148,7 @@ const Mutation = new GraphQLObjectType({
                 userId: {type: new GraphQLNonNull(GraphQLString)},
                 movieId: {type: new GraphQLNonNull(GraphQLString)},
                 comment: {type: new GraphQLNonNull(GraphQLString)},
-                score: {type: new GraphQLNonNull(GraphQLID)},
+                score: {type: new GraphQLNonNull(GraphQLInt)},
             },
             resolve(parent, args){
                 let review = new Review({

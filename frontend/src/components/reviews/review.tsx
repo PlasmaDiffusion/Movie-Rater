@@ -7,8 +7,6 @@ import {ReviewProps} from "./reviewList";
 function Review(props: ReviewProps)
 {
 
-    
-
  return(
      <React.Fragment>
     {props.review ?(

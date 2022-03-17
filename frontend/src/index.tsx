@@ -12,7 +12,8 @@ import "./app.scss";
 
 const client = new ApolloClient({
     uri: process.env.REACT_APP_DATABASE_URL,
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
+
   });
 
 class App extends Component {

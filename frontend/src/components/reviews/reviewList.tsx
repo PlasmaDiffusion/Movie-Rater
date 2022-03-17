@@ -9,10 +9,11 @@ import axios from 'axios';
 import { useMutation, useQuery } from '@apollo/client';
 import { addMovie, getMovieReviewsQuery } from '../../queries/queries';
 import { getAverageScore } from '../../helper/calculations';
-
+import { GENRE_LIST } from '../../helper/genres';
 
 export interface ReviewProps{
   movieTitle?: string;
+  genreIds?: number[];
   review?: {
     reviewerName: string;
     score: number;
@@ -21,7 +22,7 @@ export interface ReviewProps{
 }
 
 //Get all reviews for the particular movie, and list them. Also have a form to submit a review at the bottom.
-function ReviewList(props: ReviewProps)
+function ReviewList({movieTitle, genreIds}: ReviewProps)
 {
   //Check when this window is visible.
   const [targetRef, visible] = useVisible();
@@ -29,32 +30,47 @@ function ReviewList(props: ReviewProps)
   const [reviews, setReviews] = useState([]);
   const [aveScore, setAveScore] = useState(0);
   const [reviewsLoaded, setReviewsLoaded] = useState(false);
+  const [creatingMovie, setCreatingMovie] = useState(false);
+  const [movieId, setMovieId] = useState<string>("");
+
 
   const { loading, error, data } =  useQuery(getMovieReviewsQuery, {
-    variables: {name:"Le Movie"}
+    variables: {name:movieTitle}
   });
 
-  const [addMovieMutation] = useMutation(addMovie, {
-  });
+  const [addMovieMutation, {data:mutationResult, error:mutationError}] = useMutation(addMovie);
 
 
 
-  if (data && !reviewsLoaded)
+  if (data && !reviewsLoaded && !creatingMovie)
   {
     console.log("data:", data);
-    if(data.movie.reviews)
+    if(data.movie !== null)
     {
       setReviews(data.movie.reviews);
       setAveScore(getAverageScore(data.movie));
+      setMovieId(data.movie.id)
       setReviewsLoaded(true);
     }
-    
+    // Put the movie in the database if it has 0 reviews and the review page has been opened
+    else if (data.movie === null && movieTitle)
+    {
+      let genre : string = "";
+      if (genreIds) genre = GENRE_LIST[genreIds[0]];
+      setCreatingMovie(true);
+      addMovieMutation({variables:{name:movieTitle, genre:genre}});
+      setReviewsLoaded(true);
+    }
+
   }
-  else
+
+  if (mutationResult && movieId === "")
   {
-    console.log("Eh");
+    console.log("add movie result", mutationResult);
+    setMovieId(mutationResult.addMovie.id)
   }
-  
+  if (mutationError) console.log(mutationError.message);
+
   /*useEffect(() => {
 
     //Try to load in reviews from the database once this component is visible.
@@ -88,7 +104,7 @@ function ReviewList(props: ReviewProps)
          reviews ? (
          reviews.map((review, index) => (
 
-            <Review review={review} key={props.movieTitle + "review" + index}/>
+            <Review review={review} key={movieTitle + "review" + index}/>
 
          ))) : ""}
 
@@ -98,7 +114,7 @@ function ReviewList(props: ReviewProps)
          reviews.length === 0 && reviewsLoaded ? "No reviews yet for this movie." : ""}</p>
          
          <br></br><br></br>
-         <ReviewForm movieTitle={props.movieTitle} />
+         {movieId && <ReviewForm movieTitle={movieTitle} movieId={movieId} />}
          </div>
 
      </div>

@@ -14,8 +14,6 @@ function MovieList(props: ListProps){
     var [scrollTarget, setScrollTarget] = useState(0);
 
     var [refs, setRefs] = useState<any[]>([]);
-    
-
 
 
     //Read in lists of movies

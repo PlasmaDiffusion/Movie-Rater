@@ -52,7 +52,7 @@ function MovieDetails(props: MovieProps){
           <p>{props.movie.overview}</p>
         </div>
         
-        {visible && <ReviewList movieTitle={props.movie.title}/>} 
+        {visible && <ReviewList movieTitle={props.movie.title} genreIds={props.movie.genre_ids}/>} 
       </div>
     );
 }
