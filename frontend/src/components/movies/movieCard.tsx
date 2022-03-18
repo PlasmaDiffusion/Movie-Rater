@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import React, { useState, useEffect } from 'react';
 import { useVisible } from 'react-hooks-visible';
 import { useDispatch, useSelector } from 'react-redux';
-import { posted } from '../redux/actions';
+import { posted } from '../../redux/actions';
 import MovieDetails from './movieDetails';
 import MovieReviewPreview from './movieReviewPreview';
 

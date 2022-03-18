@@ -10,7 +10,7 @@ import {
 import "./app.scss";
 
 import { createStore } from "redux";
-import allReducers from "../src/components/redux/reducers";
+import allReducers from "../src/redux/reducers";
 import { Provider } from "react-redux";
 import { Auth0Provider } from "@auth0/auth0-react";
 

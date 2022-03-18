@@ -9,7 +9,7 @@ import { addMovie, getMovieReviewsQuery } from '../../queries/queries';
 import { getAverageScore } from '../../helper/calculations';
 import { GENRE_LIST } from '../../helper/genres';
 import { useDispatch } from 'react-redux';
-import { posted } from '../redux/actions';
+import { posted } from '../../redux/actions';
 
 export interface ReviewProps{
   movieTitle?: string;
