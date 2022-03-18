@@ -51,9 +51,9 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
       setReviews(data.movie.reviews);
       if(data.movie.reviews.length > 0)setAveScore(getAverageScore(data.movie));
       setMovieId(data.movie.id);
-      setReviewsLoaded(true);
       console.log("movie loaded ");
     }
+      setReviewsLoaded(true);
 
   }
 

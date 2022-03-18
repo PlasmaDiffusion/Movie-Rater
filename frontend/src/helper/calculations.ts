@@ -1,5 +1,7 @@
 
 export function getAverageScore(movie: any) {
+    if (movie.reviews.length === 0) return 0;
+    
     let totalScore: number = 0;
     movie.reviews.forEach((review: any) => {
         totalScore += review.score;

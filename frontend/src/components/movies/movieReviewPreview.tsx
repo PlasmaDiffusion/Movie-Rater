@@ -15,18 +15,23 @@ function MovieReviewPreview({movieName} : Props)
 
     const [reviewCount, setReviewCount] = useState(-1);
     const [averageScore, setAverageScore] = useState("☆☆☆☆☆");
+    const [gotPreview, setGotPreview] = useState(false);
+
 
 
     const { loading, error, data } =  useQuery(getMovieReviewPreviewQuery, {
-        variables: {name:"Le Movie"}
+        variables: {name:movieName}
     });
-    if (data)
+    if (data && !gotPreview)
     {
+        console.log(data);
         const movie = data.movie
 
         if(movie?.reviews && averageScore === "☆☆☆☆☆") setAverageScore(getAverageScoreStarString(movie));
         
         if (movie?.reviews && reviewCount === -1 ) setReviewCount(data.movie.reviews.length);
+
+        setGotPreview(true);
     }
 
 
