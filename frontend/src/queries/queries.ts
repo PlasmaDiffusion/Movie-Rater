@@ -65,7 +65,7 @@ mutation AddMovie($name: String!, $genre: String) {
 
 export const addReview = gql`
 mutation AddReview($userId: String!, $movieId: String!, $score: Int!, $comment: String!) {
-    addReview(userId: $userId, movieId: $movieId, score: $score, comment: $comment, ) {
+    addReview(userId: $userId, movieId: $movieId, score: $score, comment: $comment ) {
       comment
       score
     }

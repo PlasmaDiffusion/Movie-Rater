@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useVisible } from 'react-hooks-visible'
-import {getMovieReviewsQuery} from "./../../queries/queries";
-import { useQuery } from "@apollo/client";
 
 
 //import {useSelector, useDispatch} from 'react-redux';
 //import {setMovieId} from './actions';
 
-import axios from 'axios';
 import ReviewList from '../reviews/reviewList';
 
 

@@ -77,6 +77,8 @@ const RootQuery = new GraphQLObjectType({
             type:MovieType,
             args: {name:{type: GraphQLString}},
             resolve(parent, args){
+                console.log("Getting ", args.name);
+                return Movie.findOne({name: args.name});
                 let movie = Movie.findOne({name: args.name});
 
                 //Calculate average score of movie
@@ -90,8 +92,7 @@ const RootQuery = new GraphQLObjectType({
                 movie.averageScore = totalScore / movie.reviews.length;
                 }
                 else {console.log("No reviews")}
-
-                return movie;
+                console.log("Getting ", movie.name, " arg:", args.name);
             }
         },
         user: {
@@ -133,7 +134,10 @@ const Mutation = new GraphQLObjectType({
                 genre: {type: GraphQLString}
             },
             resolve(parent, args){
-
+                //let existingMovieCheck = Movie.find({name: args.name});
+                //console.log(existingMovieCheck);
+                //if (existingMovieCheck) {console.log("Movie already exists."); return existingMovieCheck;}
+                console.log("Adding movie", args.name);
                 let movie = new Movie({
                     name: args.name,
                     genre: args.genre,

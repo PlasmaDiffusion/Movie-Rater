@@ -24,9 +24,9 @@ function MovieReviewPreview({movieName} : Props)
     {
         const movie = data.movie
 
-        if(movie.averageScore && averageScore === "☆☆☆☆☆") setAverageScore(getAverageScoreStarString(movie));
+        if(movie?.reviews && averageScore === "☆☆☆☆☆") setAverageScore(getAverageScoreStarString(movie));
         
-        if (movie.reviews && reviewCount === -1 ) setReviewCount(data.movie.reviews.length);
+        if (movie?.reviews && reviewCount === -1 ) setReviewCount(data.movie.reviews.length);
     }
 
 

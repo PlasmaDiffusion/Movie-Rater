@@ -1,6 +1,8 @@
 import { useQuery } from '@apollo/client';
 import React, { useState, useEffect } from 'react';
 import { useVisible } from 'react-hooks-visible';
+import { useDispatch, useSelector } from 'react-redux';
+import { posted } from '../redux/actions';
 import MovieDetails from './movieDetails';
 import MovieReviewPreview from './movieReviewPreview';
 
@@ -25,7 +27,10 @@ function MovieCard(props: MovieProps){
 
     var [movieSelected, setMovieSelected] = useState(false);
     const [loadedPreview, setLoadedPreview] = useState(false);
-
+    
+    const postedReview = useSelector((state : any) => state.posted);
+    const dispatch = useDispatch();
+    console.log(postedReview);
  
     
     function openDetailsWindow()
@@ -38,6 +43,13 @@ function MovieCard(props: MovieProps){
 
     function closeDetailsWindow()
     {
+        if (postedReview)
+        {
+            dispatch(posted(false))
+            window.location.reload();
+            return;
+        }
+
         setMovieSelected(false);
 
         //Disable scrolling while fake window is up

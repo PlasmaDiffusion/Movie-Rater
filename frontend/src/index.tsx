@@ -9,12 +9,18 @@ import {
   } from "@apollo/client";
 import "./app.scss";
 
+import { createStore } from "redux";
+import allReducers from "../src/components/redux/reducers";
+import { Provider } from "react-redux";
 
 const client = new ApolloClient({
     uri: process.env.REACT_APP_DATABASE_URL,
     cache: new InMemoryCache(),
 
   });
+
+  const store = createStore(
+    allReducers);
 
 class App extends Component {
     render() {
@@ -43,9 +49,11 @@ class App extends Component {
 
 
 ReactDOM.render(
+    <Provider store={store}>
     <ApolloProvider client={client}>
     <App />
-    </ApolloProvider>,
+    </ApolloProvider>
+    </Provider>,
     document.getElementById("root")
 );
 
