@@ -61,18 +61,30 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
     let genre : string = "";
     if (genreIds) genre = GENRE_LIST[genreIds[0]];
     setCreatingMovie(true);
+
+    console.log("About to add ", movieTitle, genre);
     
     await addMovieMutation({variables:{name:movieTitle, genre:genre}});
-    
-  if (mutationResult && creatingMovie && !movieId)
-  {
-    console.log("add movie result", mutationResult);
-    if(mutationResult.addMovie){
-      return mutationResult.addMovie.id;
-    }
-  }
-  if (mutationError) console.log(mutationError.message);
+    console.log("waiting");
+    await sleep(3000);
+    console.log("done waiting", mutationResult, movieId);
 
+
+    if (mutationResult && movieId === "")
+    {
+      console.log("add movie result", mutationResult)
+      if(mutationResult.addMovie){
+        setMovieId(mutationResult.addMovie.id);
+        return mutationResult.addMovie.id;
+      }
+    }
+    if (mutationError) console.log(mutationError.message);
+
+
+  }
+
+  const sleep = (milliseconds : any) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
   }
 
   // When the review is successfully added to the db, just add it in here so there's no need to reload.

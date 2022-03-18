@@ -8,7 +8,7 @@ interface Props {
 }
 
 // Fetches the movie review score and number of reviews.
-// Only rendered when the upper MovieCard component is in view.
+// Only rendered when the upper MovieCard component is hovered.
 
 function MovieReviewPreview({movieName} : Props)
 {

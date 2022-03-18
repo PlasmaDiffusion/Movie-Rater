@@ -97,9 +97,9 @@ const RootQuery = new GraphQLObjectType({
         },
         user: {
             type:UserType,
-            args: {id:{type: GraphQLID}},
+            args: {email:{type: GraphQLString}},
             resolve(parent, args){
-                return User.findById(args.id);
+                return User.findOne({email: args.email});
             }
         },
         movies: {

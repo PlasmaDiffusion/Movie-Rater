@@ -27,6 +27,7 @@ function MovieCard(props: MovieProps){
 
     var [movieSelected, setMovieSelected] = useState(false);
     const [loadedPreview, setLoadedPreview] = useState(false);
+
     
     const postedReview = useSelector((state : any) => state.posted);
     const dispatch = useDispatch();
@@ -71,11 +72,12 @@ return(<React.Fragment>
             {loadedPreview && (<MovieReviewPreview movieName={props.movie.title} />)}
 
         </div>
-      <img src={"https://image.tmdb.org/t/p/original/" + props.movie.poster_path } width={167} height={250}></img>
+      <img src={"https://image.tmdb.org/t/p/original/" + props.movie.poster_path } alt={props.movie.title} width={167} height={250}></img>
     </div>
+    {movieSelected &&
     <div style={{display:movieSelected ? "block" : "none"}} key={"movieDetails" + props.id}>
-          <MovieDetails movie={props.movie} closeOnClick={closeDetailsWindow} />
-    </div>
+           <MovieDetails movie={props.movie} closeOnClick={closeDetailsWindow} />
+    </div>}
 </React.Fragment>);
 
 }

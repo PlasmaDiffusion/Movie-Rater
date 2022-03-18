@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from "@apollo/client";
 import { addReview} from "./../../queries/queries";
 import {ReviewProps} from "./reviewList";
+import ProfileForm from '../users/ProfileForm';
 
 interface Props extends ReviewProps{
     movieId?: string;
@@ -14,7 +15,7 @@ interface Props extends ReviewProps{
 function ReviewForm({movieTitle, movieId, createMovieInDB, updateReviewArray}: Props)
 {
 
-    const [reviewerName, setName] = useState("");
+    const [reviewerName, setReviewerName] = useState("Anonymous");
     const [score, setScore] = useState(3);
     const [comment, setComment] = useState("");
 
@@ -60,12 +61,14 @@ function ReviewForm({movieTitle, movieId, createMovieInDB, updateReviewArray}: P
 
  return(
      <div className="reviewForm">
+         
+         <ProfileForm updateUsername={(username:string)=>{setReviewerName(username)}} />
         
          <h1>Submit A Review</h1>
 
         <form method="POST" onSubmit={(e : any)=>{submitReview(e)}}>
-            <label >Username </label><br></br>
-            <input name="reviewerName" type="text" placeholder="Your name here..." onChange={(e: React.FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}></input><br></br><br></br>
+            <label >Posting as <i>{reviewerName}</i> </label><br></br><br></br>
+            {reviewerName === "Anonymous" && <><label>(Log in and you can use a username.)</label><br></br><br></br></>}
             <label>Reviewing </label><br></br>
             <input readOnly = {true} type="text" id="movie" name="movieName" value={movieTitle} ></input>
 

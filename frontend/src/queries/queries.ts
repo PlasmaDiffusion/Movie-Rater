@@ -41,6 +41,19 @@ query($name: String){
     }
 }
 `
+export const getUser = gql`
+query($email: String){
+    user(email:$email) {
+        id
+        username
+        email
+        reviews {
+            score
+            comment            
+        }
+    }
+}
+`
 
 export const getReviews = gql`
 query{
@@ -50,6 +63,7 @@ query{
     }
 }
 `
+
 
 
 export const addMovie = gql`
@@ -68,6 +82,17 @@ mutation AddReview($userId: String!, $movieId: String!, $score: Int!, $comment: 
     addReview(userId: $userId, movieId: $movieId, score: $score, comment: $comment ) {
       comment
       score
+    }
+  }
+`
+
+
+export const addUser = gql`
+mutation AddUser($name: String!, $genre: String) {
+    user(name: $name, genre: $genre) {
+      id
+      name
+      genre
     }
   }
 `
