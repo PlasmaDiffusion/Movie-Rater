@@ -43,7 +43,6 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
   const [addMovieMutation, {data:mutationResult, error:mutationError}] = useMutation(addMovie);
 
 
-  console.log("data:", data);
   if (data && !reviewsLoaded && !creatingMovie)
   {
     if(data.movie)
@@ -51,12 +50,12 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
       setReviews(data.movie.reviews);
       if(data.movie.reviews.length > 0)setAveScore(getAverageScore(data.movie));
       setMovieId(data.movie.id);
-      console.log("movie loaded ");
     }
       setReviewsLoaded(true);
 
   }
 
+  // If the movie isn't in this project's back end, this will be called upon creating a review.
   async function addMoveToDB()
   {
     let genre : string = "";
@@ -84,6 +83,10 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
     setReviews([...revArr]);
     setReviewWasPosted(true);   
     dispatch(posted(true))
+
+    // Get new average score?
+    let updatedMovie = {reviews: revArr}
+    setAveScore(getAverageScore(updatedMovie));
   }
 
 
@@ -99,9 +102,9 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
 
          ))) : ""}
 
-         <p style={{textAlign:"center"}}>{ //Loading reviews...
+         <p style={{textAlign:"center"}}>{
          !reviewsLoaded ? "Checking for reviews..." : ""}</p>
-         <p style={{textAlign:"center"}}>{ //Mention if there aren't any reviews for this movie yet.
+         <p style={{textAlign:"center"}}>{ //Mention if there aren't any reviews for this movie yet after an attempt was made to get them.
          reviews.length === 0 && reviewsLoaded ? "No reviews yet for this movie." : ""}</p>
          
          <br></br><br></br>

@@ -1,17 +1,18 @@
 
-export function getAverageScore(movie: any) {
+export function getAverageScore(movie: any) : number {
     if (movie.reviews.length === 0) return 0;
     
     let totalScore: number = 0;
     movie.reviews.forEach((review: any) => {
         totalScore += review.score;
     });
-    return totalScore / movie.reviews.length;
+    let num = totalScore / movie.reviews.length;
+    return Math.round(num * 100) / 100;
     
 }
 
 
-export function getAverageScoreStarString(movie: any) {
+export function getAverageScoreStarString(movie: any) : string {
     const averageScore = getAverageScore(movie);
 
     let starString = "";

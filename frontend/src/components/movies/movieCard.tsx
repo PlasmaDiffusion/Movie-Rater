@@ -43,6 +43,7 @@ function MovieCard(props: MovieProps){
 
     function closeDetailsWindow()
     {
+        // Force a refresh after posting a review and closing the window
         if (postedReview)
         {
             dispatch(posted(false))
@@ -73,7 +74,7 @@ return(<React.Fragment>
       <img src={"https://image.tmdb.org/t/p/original/" + props.movie.poster_path } width={167} height={250}></img>
     </div>
     <div style={{display:movieSelected ? "block" : "none"}} key={"movieDetails" + props.id}>
-          <MovieDetails movie={props.movie} closeOnClick={closeDetailsWindow} /> {/* To Do: Pass in a function prop for closing? */}
+          <MovieDetails movie={props.movie} closeOnClick={closeDetailsWindow} />
     </div>
 </React.Fragment>);
 

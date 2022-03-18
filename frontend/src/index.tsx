@@ -12,6 +12,7 @@ import "./app.scss";
 import { createStore } from "redux";
 import allReducers from "../src/components/redux/reducers";
 import { Provider } from "react-redux";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 const client = new ApolloClient({
     uri: process.env.REACT_APP_DATABASE_URL,
@@ -19,8 +20,7 @@ const client = new ApolloClient({
 
   });
 
-  const store = createStore(
-    allReducers);
+const store = createStore(allReducers);
 
 class App extends Component {
     render() {
@@ -50,9 +50,14 @@ class App extends Component {
 
 ReactDOM.render(
     <Provider store={store}>
+    <Auth0Provider
+    domain="dev-hitqxx5e.us.auth0.com"
+    clientId="Lgi9Rq7cwWfSB2jZJ8FEUgoj4iLIyjp1"
+    redirectUri={window.location.origin}>
     <ApolloProvider client={client}>
-    <App />
+        <App />
     </ApolloProvider>
+    </Auth0Provider>
     </Provider>,
     document.getElementById("root")
 );
