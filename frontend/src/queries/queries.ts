@@ -88,6 +88,9 @@ mutation AddReview($userId: String!, $movieId: String!, $score: Int!, $comment: 
     addReview(userId: $userId, movieId: $movieId, score: $score, comment: $comment ) {
       comment
       score
+      user {
+        username
+      }
     }
   }
 `

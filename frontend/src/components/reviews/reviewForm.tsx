@@ -1,89 +1,74 @@
 import React, { useState } from 'react';
 import { useMutation } from "@apollo/client";
-import { addReview} from "./../../queries/queries";
+import { addMovie, addReview} from "./../../queries/queries";
 import {ReviewProps} from "./reviewList";
 import UsernameForm from '../users/UsernameForm';
+import { GENRE_LIST } from '../../helper/genres';
 
 interface Props extends ReviewProps{
     movieId?: string;
-    createMovieInDB: () => any;
+    genreIds?: number[];
     updateReviewArray: (arg0: any) => any;
-
 }
 
 //The form to submit a review at the bottom of the page.
-function ReviewForm({movieTitle, movieId, createMovieInDB, updateReviewArray}: Props)
+function ReviewForm({movieTitle, movieId, genreIds, updateReviewArray}: Props)
 {
 
     const [reviewerName, setReviewerName] = useState("Anonymous");
-    const [reviewerId, setReviewerId] = useState("0");
+    const [reviewerId, setReviewerId] = useState("622bc939c623a2fd556c9fda"); // Use Anonymous' user id
 
     const [score, setScore] = useState(3);
     const [comment, setComment] = useState("");
 
     const [reviewAdded, setReviewAdded] = useState(false);
-
         
-    const [addReviewMutation, { data }] = useMutation(addReview);
+    const [addReviewMutation, { data:addReviewResult, error:addReviewError }] = useMutation(addReview);
+    const [addMovieMutation, {data:addMovieResult, error:addMovieError}] = useMutation(addMovie);
+
     
-    if (data && !reviewAdded)
+
+    if (addReviewResult && !reviewAdded)
     {
-        console.log(data);
-        updateReviewArray(data.addReview);
+        console.log(addReviewResult);
+        updateReviewArray(addReviewResult.addReview);
         setReviewAdded(true);
     }
 
-    
+    if (addMovieResult)
+    {
+      console.log("add movie result", addMovieResult)
+      if(addMovieResult.addMovie){
+        prepareReviewForSending(addMovieResult.addMovie?.id);
+      }
+    }
+
+    if (addReviewError) console.log(addReviewError.message);
+    if (addMovieError) console.log(addMovieError.message);
+
+
     // If the movie isn't in this project's back end, this will be called upon creating a review.
-    async function addMoveToDB()
+    async function addMovieToDB()
     {
       let genre : string = "";
       if (genreIds) genre = GENRE_LIST[genreIds[0]];
-      setCreatingMovie(true);
 
       console.log("About to add ", movieTitle, genre);
       
       await addMovieMutation({variables:{name:movieTitle, genre:genre}});
-      console.log("waiting");
-      console.log("done waiting", mutationResult, movieId);
-
-
-      if (mutationResult && movieId === "")
-      {
-        console.log("add movie result", mutationResult)
-        if(mutationResult.addMovie){
-          setMovieId(mutationResult.addMovie.id);
-          return mutationResult.addMovie.id;
-        }
-      }
-      if (mutationError) console.log(mutationError.message);
-
-
-  }
+    }
 
     async function submitReview(e: React.FormEvent<HTMLInputElement>)
     {
         e.preventDefault();
+        if (!score || !reviewerId) return;
 
         //If the movie doesn't exist in the database, add it first.
-        let movieIdToAttachTo = movieId;
-        if (!movieId) movieIdToAttachTo = await createMovieInDB();
-
-
-        let data = {
-            reviewerId,
-            movieTitle,
-            movieId,
-            score,
-            comment}
-        console.log("Adding this review: ", data, movieIdToAttachTo);    
-
-        if (!reviewerId || !comment || !score) return; 
-        if (!movieIdToAttachTo) {alert("No movie id :("); return;}
-
-        addReviewMutation({variables: {movieId: movieIdToAttachTo, userId: reviewerId, score, comment}});
-
+        if (movieId)prepareReviewForSending(movieId);
+        else addMovieToDB();
     }
+
+    function prepareReviewForSending(movieId: string) {addReviewMutation({variables: {movieId, userId: reviewerId, score, comment}});}
 
     //Click a star and update the score. The render part below will take care of the star output.
     function onClickStar(e: React.MouseEvent<HTMLInputElement>)
@@ -132,7 +117,7 @@ function ReviewForm({movieTitle, movieId, createMovieInDB, updateReviewArray}: P
             <textarea name="comment" onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setComment(e.currentTarget.value)} rows={4} cols={50} placeholder="Your review here..."></textarea>
             
             <br></br><br></br>
-             <input type="submit" value={data ? "Submitted" :"Submit"} />
+             <input type="submit" value={addReviewResult ? "Submitted" :"Submit"} />
          </form>
 
      </div>

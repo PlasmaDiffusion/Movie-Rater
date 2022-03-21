@@ -13,7 +13,7 @@ interface  Props{
 
 function UsernameForm({updateUser} : Props){
 
-    const { user } = useAuth0();
+    const { user, isAuthenticated } = useAuth0();
 
 
     const [username, setUsername] = useState("");
@@ -50,7 +50,7 @@ function UsernameForm({updateUser} : Props){
     }
 
     if (addResult) return <></>
-    if (!data || data.user=== null)return (
+    if (data?.user=== null && isAuthenticated)return (
     <div className="reviewForm">
         
         <h1>Enter A Username</h1>

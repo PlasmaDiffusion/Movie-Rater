@@ -4,10 +4,9 @@ import ReviewForm from "./reviewForm";
 import "./review.scss";
 
 
-import { useMutation, useQuery } from '@apollo/client';
-import { addMovie, getMovieReviewsQuery } from '../../queries/queries';
+import {  useQuery } from '@apollo/client';
+import { getMovieReviewsQuery } from '../../queries/queries';
 import { getAverageScore } from '../../helper/calculations';
-import { GENRE_LIST } from '../../helper/genres';
 import { useDispatch } from 'react-redux';
 import { posted } from '../../redux/actions';
 
@@ -43,7 +42,6 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
     variables: {name:movieTitle}
   });
 
-  const [addMovieMutation, {data:mutationResult, error:mutationError}] = useMutation(addMovie);
 
 
   if (data && !reviewsLoaded && !creatingMovie)
@@ -59,37 +57,6 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
 
   }
 
-  // If the movie isn't in this project's back end, this will be called upon creating a review.
-  async function addMoveToDB()
-  {
-    let genre : string = "";
-    if (genreIds) genre = GENRE_LIST[genreIds[0]];
-    setCreatingMovie(true);
-
-    console.log("About to add ", movieTitle, genre);
-    
-    await addMovieMutation({variables:{name:movieTitle, genre:genre}});
-    console.log("waiting");
-    await sleep(3000);
-    console.log("done waiting", mutationResult, movieId);
-
-
-    if (mutationResult && movieId === "")
-    {
-      console.log("add movie result", mutationResult)
-      if(mutationResult.addMovie){
-        setMovieId(mutationResult.addMovie.id);
-        return mutationResult.addMovie.id;
-      }
-    }
-    if (mutationError) console.log(mutationError.message);
-
-
-  }
-
-  const sleep = (milliseconds : any) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
 
   // When the review is successfully added to the db, just add it in here so there's no need to reload.
   function addReview(review: any)
@@ -124,7 +91,7 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
          reviews.length === 0 && reviewsLoaded ? "No reviews yet for this movie." : ""}</p>
          
          <br></br><br></br>
-         {!reviewWasPosted && <ReviewForm movieTitle={movieTitle} movieId={movieId} createMovieInDB={addMoveToDB} updateReviewArray={addReview} />}
+         {!reviewWasPosted && <ReviewForm movieTitle={movieTitle} movieId={movieId} updateReviewArray={addReview} />}
          </div>
 
      </div>
