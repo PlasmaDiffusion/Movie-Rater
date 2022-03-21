@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from "@apollo/client";
 import { addReview} from "./../../queries/queries";
 import {ReviewProps} from "./reviewList";
-import ProfileForm from '../users/ProfileForm';
+import UsernameForm from '../users/UsernameForm';
 
 interface Props extends ReviewProps{
     movieId?: string;
@@ -33,6 +33,34 @@ function ReviewForm({movieTitle, movieId, createMovieInDB, updateReviewArray}: P
         setReviewAdded(true);
     }
 
+    
+    // If the movie isn't in this project's back end, this will be called upon creating a review.
+    async function addMoveToDB()
+    {
+      let genre : string = "";
+      if (genreIds) genre = GENRE_LIST[genreIds[0]];
+      setCreatingMovie(true);
+
+      console.log("About to add ", movieTitle, genre);
+      
+      await addMovieMutation({variables:{name:movieTitle, genre:genre}});
+      console.log("waiting");
+      console.log("done waiting", mutationResult, movieId);
+
+
+      if (mutationResult && movieId === "")
+      {
+        console.log("add movie result", mutationResult)
+        if(mutationResult.addMovie){
+          setMovieId(mutationResult.addMovie.id);
+          return mutationResult.addMovie.id;
+        }
+      }
+      if (mutationError) console.log(mutationError.message);
+
+
+  }
+
     async function submitReview(e: React.FormEvent<HTMLInputElement>)
     {
         e.preventDefault();
@@ -50,6 +78,9 @@ function ReviewForm({movieTitle, movieId, createMovieInDB, updateReviewArray}: P
             comment}
         console.log("Adding this review: ", data, movieIdToAttachTo);    
 
+        if (!reviewerId || !comment || !score) return; 
+        if (!movieIdToAttachTo) {alert("No movie id :("); return;}
+
         addReviewMutation({variables: {movieId: movieIdToAttachTo, userId: reviewerId, score, comment}});
 
     }
@@ -65,7 +96,7 @@ function ReviewForm({movieTitle, movieId, createMovieInDB, updateReviewArray}: P
  return(
      <div className="reviewForm">
          
-         <ProfileForm updateUser={(username:string, id: string)=>{setReviewerName(username); setReviewerId(id)}} />
+         <UsernameForm updateUser={(username:string, id: string)=>{setReviewerName(username); setReviewerId(id)}} />
         
          <h1>Submit A Review</h1>
 
