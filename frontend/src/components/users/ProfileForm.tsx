@@ -5,12 +5,15 @@ import { addUser, getUser } from "../../queries/queries";
 
 
 interface  Props{
-    updateUsername: (username:string)=>any;
+    updateUser: (username:string, id:string)=>any;
 }
 
-function ProfileForm({updateUsername} : Props){
+// Using the logged in user's email, this will get a username and id from the database.
+// If there is no username in the database, prompt the user to enter a name here.
 
-    const { user, isAuthenticated, isLoading } = useAuth0();
+function ProfileForm({updateUser} : Props){
+
+    const { user } = useAuth0();
 
 
     const [username, setUsername] = useState("");
@@ -22,14 +25,27 @@ function ProfileForm({updateUsername} : Props){
 
     if (data)
     {
-        console.log(data);
+        console.log("user data: ", data);
+        if (data.user !== null) updateUser(data.user.username, data.user.id);
+
+    }
+    if (addResult)
+    {
+        console.log("result: ", addResult)
+        if (addResult.user !== null) updateUser(addResult.addUser.username, addResult.addUser.id);
     }
 
     function onSubmit(e:React.FormEvent<HTMLInputElement>)
     {
         e.preventDefault();
-        console.log("new username will be: ", username);
-        if (username !== "") updateUsername(username);
+        
+        if (username !== "")
+        {
+            if (window.confirm(`Is the name ${username} okay? You won't be able to change it later.`))
+            {
+                addUserMutation({variables: {email:user?.email, username}})
+            }
+        }
     }
 
     if (!data || data.user=== null)return (
@@ -39,7 +55,7 @@ function ProfileForm({updateUsername} : Props){
         <form method="POST" onSubmit={(e:any)=>onSubmit(e)}>
             
             <p style={{textAlign:"center"}}>Please enter a <strong>username</strong> that <i>people will see in your reviews.</i></p>
-            <p>Ignore this if you'd prefer to be anonymous.</p>
+            <p style={{textAlign:"center"}}>Ignore this if you'd prefer to be anonymous.</p>
 
 
            <label >Username </label><br></br>

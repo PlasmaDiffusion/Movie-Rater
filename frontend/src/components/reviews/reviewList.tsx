@@ -15,9 +15,12 @@ export interface ReviewProps{
   movieTitle?: string;
   genreIds?: number[];
   review?: {
-    reviewerName: string;
+    
     score: number;
     comment?: string;
+    user?: {
+      username: string;
+    }
   }
 }
 
@@ -48,6 +51,7 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
     if(data.movie)
     {
       setReviews(data.movie.reviews);
+      console.log(data.movie.reviews);
       if(data.movie.reviews.length > 0)setAveScore(getAverageScore(data.movie));
       setMovieId(data.movie.id);
     }

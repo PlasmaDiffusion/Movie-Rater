@@ -36,7 +36,10 @@ query($name: String){
         averageScore
         reviews {
             score
-            comment            
+            comment
+            user{
+                username
+            }            
         }
     }
 }
@@ -60,6 +63,9 @@ query{
     reviews {
         text
         score
+        user{
+            username
+        }
     }
 }
 `
@@ -88,11 +94,11 @@ mutation AddReview($userId: String!, $movieId: String!, $score: Int!, $comment: 
 
 
 export const addUser = gql`
-mutation AddUser($name: String!, $genre: String) {
-    user(name: $name, genre: $genre) {
+mutation AddUser($email: String!, $username: String!) {
+    addUser(email: $email, username: $username) {
       id
-      name
-      genre
+      email
+      username
     }
   }
 `

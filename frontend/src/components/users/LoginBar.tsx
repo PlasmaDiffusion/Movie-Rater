@@ -16,7 +16,7 @@ const LoginBar = () => {
             <>
             <LogoutButton />
             <p>{user.email}</p>
-            <p>{user.name}</p></>
+            </>
         ) : (<LoginButton />) } 
     </div>    
 

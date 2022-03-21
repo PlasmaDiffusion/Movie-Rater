@@ -16,6 +16,8 @@ function ReviewForm({movieTitle, movieId, createMovieInDB, updateReviewArray}: P
 {
 
     const [reviewerName, setReviewerName] = useState("Anonymous");
+    const [reviewerId, setReviewerId] = useState("0");
+
     const [score, setScore] = useState(3);
     const [comment, setComment] = useState("");
 
@@ -41,13 +43,14 @@ function ReviewForm({movieTitle, movieId, createMovieInDB, updateReviewArray}: P
 
 
         let data = {
-            reviewerName:reviewerName,
-            movieName:movieTitle,
-            score:score,
-            comment:comment}
+            reviewerId,
+            movieTitle,
+            movieId,
+            score,
+            comment}
         console.log("Adding this review: ", data, movieIdToAttachTo);    
 
-        addReviewMutation({variables: {movieId: movieIdToAttachTo, userId:"622bc939c623a2fd556c9fda", score, comment}});
+        addReviewMutation({variables: {movieId: movieIdToAttachTo, userId: reviewerId, score, comment}});
 
     }
 
@@ -62,7 +65,7 @@ function ReviewForm({movieTitle, movieId, createMovieInDB, updateReviewArray}: P
  return(
      <div className="reviewForm">
          
-         <ProfileForm updateUsername={(username:string)=>{setReviewerName(username)}} />
+         <ProfileForm updateUser={(username:string, id: string)=>{setReviewerName(username); setReviewerId(id)}} />
         
          <h1>Submit A Review</h1>
 

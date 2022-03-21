@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import {ReviewProps} from "./reviewList";
 
@@ -12,7 +12,7 @@ function Review(props: ReviewProps)
     {props.review ?(
     <div className="review">
         
-        <h3>Review by {props.review.reviewerName}</h3>
+        <h3>Review by {props.review.user?.username}</h3>
         <p> ★{props.review.score}/5 </p>
         <p> {props.review.comment} </p>
     
