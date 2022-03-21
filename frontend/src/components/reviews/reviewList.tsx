@@ -86,7 +86,7 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
          ))) : ""}
 
          <p style={{textAlign:"center"}}>{
-         !reviewsLoaded ? "Checking for reviews..." : ""}</p>
+         !reviewsLoaded ? "" : ""}</p>
          <p style={{textAlign:"center"}}>{ //Mention if there aren't any reviews for this movie yet after an attempt was made to get them.
          reviews.length === 0 && reviewsLoaded ? "No reviews yet for this movie." : ""}</p>
          
