@@ -54,7 +54,6 @@ function ReviewList({movieTitle, genreIds}: ReviewProps)
       setMovieId(data.movie.id);
     }
       setReviewsLoaded(true);
-
   }
 
 
