@@ -71,10 +71,10 @@ function ReviewForm({movieTitle, movieId, genreIds, updateReviewArray}: Props)
     function prepareReviewForSending(movieId: string) {addReviewMutation({variables: {movieId, userId: reviewerId, score, comment}});}
 
     //Click a star and update the score. The render part below will take care of the star output.
-    function onClickStar(e: React.MouseEvent<HTMLInputElement>)
+    function onClickStar(newScore: number)
     {
-        console.log(e.currentTarget.value);
-        setScore(parseInt(e.currentTarget.value));
+        console.log(newScore);
+        setScore(newScore);
     }
 
 
@@ -94,16 +94,13 @@ function ReviewForm({movieTitle, movieId, genreIds, updateReviewArray}: Props)
             <div>
                 <br></br><br></br>
 
-                <input type="radio" className="invisibleRadio" onClick={onClickStar} name="score" id="score1" value="1" ></input>
-                <label className="star">★</label>
-                <input type="radio" className="invisibleRadio" onClick={onClickStar} name="score" id="score2" value="2" ></input>
-                <label className="star">{score > 1 ? "★" : "☆"}</label>
-                <input type="radio" className="invisibleRadio" onClick={onClickStar} name="score" id="score3" value="3" ></input>
-                <label className="star">{score > 2 ? "★" : "☆"}</label>
-                <input type="radio" className="invisibleRadio" onClick={onClickStar} name="score" id="score4" value="4" ></input>
-                <label className="star">{score > 3 ? "★" : "☆"}</label>
-                <input type="radio" className="invisibleRadio" onClick={onClickStar} name="score" id="score5" value="5" ></input>
-                <label className="star">{score > 4 ? "★" : "☆"}</label>
+                <div className='buttonContainer'>
+                    <input type="button" name="score" className='starButton' onClick={()=>{onClickStar(1)}}  value={score > 0 ? "★" : "☆"}/>
+                    <input type="button" name="score" className='starButton' onClick={()=>{onClickStar(2)}}  value={score > 1 ? "★" : "☆"}/>
+                    <input type="button" name="score" className='starButton' onClick={()=>{onClickStar(3)}}  value={score > 2 ? "★" : "☆"}/>
+                    <input type="button" name="score" className='starButton' onClick={()=>{onClickStar(4)}}  value={score > 3 ? "★" : "☆"}/>
+                    <input type="button" name="score" className='starButton' onClick={()=>{onClickStar(5)}}  value={score > 4 ? "★" : "☆"}/>
+                </div>
                 <br></br>
                 
                 <label>{score}/5</label>
