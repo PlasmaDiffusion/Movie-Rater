@@ -1,0 +1,20 @@
+jobs:
+  deploy:
+    working_directory: "~/backend"
+    executor: heroku/default
+    steps:
+      - checkout
+         path: ~/backend
+      - heroku/install
+      - run:
+          command: >
+            echo "The command above installs Heroku, the command below deploys.
+            What you do inbetween is up to you!"
+      - heroku/deploy-via-git
+orbs:
+  heroku: circleci/heroku@x.y
+version: 2.1
+workflows:
+  heroku_deploy:
+    jobs:
+      - deploy
