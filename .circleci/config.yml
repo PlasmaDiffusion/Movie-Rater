@@ -4,7 +4,7 @@ jobs:
     executor: heroku/default
     steps:
       - checkout
-        path: ~/backend
+          path: ~/backend
       - heroku/install
       - run:
           command: >
