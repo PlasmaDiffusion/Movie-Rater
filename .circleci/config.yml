@@ -7,8 +7,10 @@ jobs:
       - heroku/install
       - run:
           command: >
-            echo "The command above installs Heroku, the command below deploys.
-            What you do inbetween is up to you!"
+            npm install
+      - run:
+          command: >
+            npm start
       - heroku/deploy-via-git
 orbs:
   heroku: circleci/heroku@1.2.6
