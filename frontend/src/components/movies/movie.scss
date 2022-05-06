@@ -114,6 +114,10 @@ button:hover {
     button:first {
         margin-left: 100px;
     }
+
+    button {
+        visibility: hidden;
+    }
 }
 
 .close {
@@ -147,10 +151,11 @@ button:hover {
 
 @media screen and (max-width: 480px) {
     .listedMovie {
-        width: 128px;
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
         img {
-            width: 128px;
-            height: 128px;
+            width: 83.5px;
+            height: 125px;
         }
         p {
             overflow-wrap: normal;
@@ -160,9 +165,15 @@ button:hover {
             text-overflow: ellipsis;
         }
 
+
         .movieName {
             height: 48px;
         }
+    }
+    
+
+    .movieList {
+        margin-bottom: 0;
     }
 
     //If the movie title has a lot of characters, make the text smaller (smaller than usual for phones)

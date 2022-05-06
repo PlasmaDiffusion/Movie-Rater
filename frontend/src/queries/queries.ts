@@ -2,21 +2,7 @@ import {
     gql,
   } from "@apollo/client";
 
-/*export const getMovieQuery = gql`
-{
-    movie($id: ID) {
-        averageScore
-        reviews {
-            text,
-            score,
-            user {
-                username,
-                email
-            }
-        }
-    }
-}
-`*/
+
 
 export const getMovieReviewPreviewQuery = gql`
 query($name: String){

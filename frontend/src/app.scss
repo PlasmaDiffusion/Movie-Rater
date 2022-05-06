@@ -84,3 +84,15 @@ form {
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(61, 61, 61);
 }
+
+
+@media screen and (max-width: 480px) {
+
+    .flex-container{
+        height: 210px;
+        width:auto;
+        padding-bottom: 1rem;
+        margin: 1rem 0;
+    }
+
+}

@@ -43,10 +43,10 @@ function MovieList(props: ListProps){
         if(refs[scrollTarget]){
           console.log(refs[scrollTarget]);
           refs[scrollTarget].focus();
-          /*refs[scrollTarget].current.scrollIntoView({ 
+          refs[scrollTarget].current.scrollIntoView({ 
                behavior: "smooth", 
                block: "nearest"
-            })*/
+            })
             
         }
     }
@@ -58,13 +58,13 @@ function MovieList(props: ListProps){
       
       <h2>{props.category}</h2>
         <div className="movieRow">
-          <button onClick={onClickScroll} style={{visibility: "hidden"}}> - </button>
+          <button onClick={onClickScroll} > - </button>
         <div className="flex-container" >
             {movieArray.map((movie, index) => (
-              <MovieCard movie={movie}  /*ref={saveThisRef}*/ key={props.category + index} />
+              <MovieCard movie={movie}  ref={saveThisRef} key={props.category + index} />
             ))}
         </div>
-        <button onClick={onClickScroll} style={{visibility: "hidden"}}> - </button>
+        <button onClick={onClickScroll} > - </button>
 
       </div>
     </div>
