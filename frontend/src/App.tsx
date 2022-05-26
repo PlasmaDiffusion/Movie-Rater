@@ -11,8 +11,6 @@ function App() {
                 <header>
                     <>
                 <LoginBar/>
-                <br />
-                    Movie Rater
                     </>
                 </header>
                 
