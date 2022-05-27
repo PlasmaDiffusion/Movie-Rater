@@ -62,22 +62,21 @@ function MovieCard(props: MovieProps){
         if(!loadedPreview) setLoadedPreview(true)
     }
 
-return(<React.Fragment>
-    <div className="listedMovie" key={"movie" + props.id} onClick={openDetailsWindow} onTouchStart={preparePreviewOnHover} onMouseOver={preparePreviewOnHover} >
-        <div className="showOnHover" >
-            {/*props.movie.title.length > 50 ? <p className="movieName text-smaller">{props.movie.title}</p> :  ""*/}
-            {/*props.movie.title.length > 30 && props.movie.title.length <= 50 ? <p className="movieName text-small">{props.movie.title}</p> :  ""*/}
-            {/*props.movie.title.length <= 30 ? <p className="movieName">{props.movie.title}</p> :  ""*/}
-            {loadedPreview && (<MovieReviewPreview movieName={props.movie.title} />)}
+return(
+        <React.Fragment>
+            <div className="listedMovie" key={"movie" + props.id} onClick={openDetailsWindow} onTouchStart={preparePreviewOnHover} onMouseOver={preparePreviewOnHover} >
+                <div className="showOnHover" >
+                    {loadedPreview && (<MovieReviewPreview movieName={props.movie.title} />)}
 
-        </div>
-      <img src={"https://image.tmdb.org/t/p/original/" + props.movie.poster_path } alt={props.movie.title} width={167} height={250}></img>
-    </div>
-    {movieSelected &&
-    <div style={{display:movieSelected ? "block" : "none"}} key={"movieDetails" + props.id}>
-           <MovieDetails movie={props.movie} closeOnClick={closeDetailsWindow} />
-    </div>}
-</React.Fragment>);
+                </div>
+              <img src={"https://image.tmdb.org/t/p/original/" + props.movie.poster_path } alt={props.movie.title} width={167} height={250}></img>
+            </div>
+            {movieSelected &&
+            <div style={{display:movieSelected ? "block" : "none"}} key={"movieDetails" + props.id}>
+                   <MovieDetails movie={props.movie} closeOnClick={closeDetailsWindow} />
+            </div>}
+        </React.Fragment>
+        );
 
 }
 

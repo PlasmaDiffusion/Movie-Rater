@@ -15,7 +15,6 @@ function MovieDetails(props: MovieProps){
 
   //Check when this window is visible.
   const [targetRef, visible] = useVisible();
-  var [height, setHeight] = useState("");
 
 
   //Redux state
@@ -29,9 +28,6 @@ function MovieDetails(props: MovieProps){
     {
       console.log(props.movie);
 
-      //Make movie details window higher if the description is long
-      setHeight(props.movie.overview.length > 400 ? "90%" : "70%" )
-
       //dispatch(setMovieId(props.movie.id));
       //console.log(getState());
     }
@@ -41,7 +37,7 @@ function MovieDetails(props: MovieProps){
     return (
       //@ts-ignore: Ignore ref error
       <div ref={targetRef} className="movieBG scroll">
-        <div className="movieDetails" style={{height: height}}>
+        <div className="movieDetails" >
           <button className="close" onClick={props.closeOnClick}> X </button>
           <h2>{props.movie.title}</h2>
           <p>{props.movie.release_date}</p>

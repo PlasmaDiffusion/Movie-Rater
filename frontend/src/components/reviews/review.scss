@@ -98,7 +98,7 @@ textarea {
 
     textarea {
         margin-left: 0;
-        width: 100%;
+        width: 95%;
     }
 
     .star {
@@ -111,14 +111,14 @@ textarea {
     .invisibleRadio {
         font-size: 24px;
     }
-}
 
-//Extra small star so it still fits on a tiny phone
-@media screen and (max-width: 350px) {
-    .star {
-        font-size: 16px;
-        position: relative;
-        left: -16px;
-        z-index: -1;
+
+    .review {
+        width: 13rem;
+    }
+
+    .reviewList {
+        margin: auto;
+        width: 90%;
     }
 }

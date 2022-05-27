@@ -67,9 +67,12 @@
     position: relative;
     margin: auto;
     margin-top: 1%;
+    padding-bottom: 0.5rem;
     width: 50%;
     background-color: $bg2;
     border-radius: 12px;
+    height: fit-content;
+
 }
 
 //Submit button
@@ -118,6 +121,11 @@ button:hover {
     button {
         visibility: hidden;
     }
+
+    .close {
+        visibility: visible;
+    }
+    
 }
 
 .close {
@@ -149,7 +157,7 @@ button:hover {
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: $mobileMaxWidth) {
     .listedMovie {
         margin-right: 0.5rem;
         margin-left: 0.5rem;
@@ -182,5 +190,13 @@ button:hover {
     }
     .text-smaller {
         font-size: 8.8pt;
+    }
+
+    .movieDetails {
+        width: 225px;
+    }
+
+    .close {
+        margin-left: 9.5rem;
     }
 }
