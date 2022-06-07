@@ -1,124 +1,140 @@
-@import "../../variables";
+@import '../../variables';
 
 //Review related
 .reviewList {
-    //position: absolute;
-    //overflow: scroll;
-    height: 30%;
-    width: 60%;
-    margin-left: 20%;
+  height: 30%;
+  width: 60%;
+  margin-left: 20%;
 
-    p {
-        text-align: left;
-    }
+  p {
+    text-align: left;
+  }
 }
 
 .review {
-    border: solid 1px mediumslateblue;
-    background: $bg2;
-    width: 50%;
-    margin: auto;
-    padding: 4px;
-    margin-top: 1rem;
-    border-radius: 4px;
+  border: solid 1px mediumslateblue;
+  background: $bg2;
+  width: 50%;
+  margin: auto;
+  padding: 4px;
+  margin-top: 1rem;
+  border-radius: 4px;
 
-    h3 {
-        text-align: center;
-    }
+  h3 {
+    text-align: center;
+  }
 
-    p:first-of-type {
-        text-align: center;
-    }
+  p:first-of-type {
+    text-align: center;
+  }
 }
 
 //Hide the radio input but let the user still click it, and have star ASCIIs above it
 .invisibleRadio {
-    opacity: 0;
+  opacity: 0;
 }
 
 .star {
-    font-size: 32px;
-    position: relative;
-    left: -32px;
-    z-index: -1;
+  font-size: 32px;
+  position: relative;
+  left: -32px;
+  z-index: -1;
 }
 
-.buttonContainer{
-    display: flex;
-    justify-content: center;
+.buttonContainer {
+  display: flex;
+  justify-content: center;
 }
 
-.buttonContainer input[type="button"] {
-    height: 64px;
-    color: white;
-    background-color: $bg2;
+.buttonContainer input[type='button'] {
+  height: 64px;
+  color: white;
+  background-color: $bg2;
 }
 
-input[type="text"] {
-    width: 30%;
-    font-size: 1rem;
+input[type='text'] {
+  width: 30%;
+  font-size: 1rem;
 }
 
 //Submit button
-input[type="submit"], input[type="button"] {
-    font-size: 1.5rem;
-    background-color: $bg2;
-    color: white;
-    border-color: $bg2;
-    border-radius: 4px;
-    outline: $bg2;
+input[type='submit'],
+input[type='button'] {
+  font-size: 1.5rem;
+  background-color: $bg2;
+  color: white;
+  border-color: $bg2;
+  border-radius: 4px;
+  outline: $bg2;
 }
 
-input[type="submit"]:hover, input[type="button"] {
-    font-size: 1.5rem;
-    background-color: $bg1;
-    color: white;
+input[type='submit']:hover,
+input[type='button'] {
+  font-size: 1.5rem;
+  background-color: $bg1;
+  color: white;
 }
 
 textarea {
-    margin: auto;
-    font-size: 1rem;
-    color: white;
-    background-color: $inputBG;
+  margin: auto;
+  font-size: 1rem;
+  color: white;
+  background-color: $inputBG;
 }
 
 //Text input colours and border
-input[type="text"],
+input[type='text'],
 textarea {
-    color: white;
-    background-color: $inputBG;
-    border: 1px solid rgb(34, 34, 34);
-    border-radius: 4px;
+  color: white;
+  background-color: $inputBG;
+  border: 1px solid rgb(34, 34, 34);
+  border-radius: 4px;
+}
+
+// Review page buttons
+.reviewPageButtons {
+  display: flex;
+  width: 6rem;
+  margin: auto;
+
+  button {
+    height: 30px !important;
+    width: 40px !important;
+    text-align: center;
+    visibility: visible !important;
+  }
+  p {
+      margin: 0 2rem 0 2rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
-    input[type="text"] {
-        width: 60%;
-    }
+  input[type='text'] {
+    width: 60%;
+  }
 
-    textarea {
-        margin-left: 0;
-        width: 95%;
-    }
+  textarea {
+    margin-left: 0;
+    width: 95%;
+  }
 
-    .star {
-        font-size: 24px;
-        position: relative;
-        left: -24px;
-        z-index: -1;
-    }
+  .star {
+    font-size: 24px;
+    position: relative;
+    left: -24px;
+    z-index: -1;
+  }
 
-    .invisibleRadio {
-        font-size: 24px;
-    }
+  .invisibleRadio {
+    font-size: 24px;
+  }
 
+  .review {
+    width: 13rem;
+  }
 
-    .review {
-        width: 13rem;
-    }
-
-    .reviewList {
-        margin: auto;
-        width: 90%;
-    }
+  .reviewList {
+    margin: auto;
+    width: 90%;
+  }
 }
