@@ -65,7 +65,8 @@ function ReviewList({ movieTitle, genreIds }: ReviewProps) {
   return (
     <div>
       <h2>Average Score: {aveScore}</h2>
-      <div className="reviewList">
+      <div className="reviewPage">
+        <div className={ reviews.length > 10 ? "trimmedReviewList" : ""}>
         {
           //List all reviews here, or at least 10 of them, then display page and arrow buttons
           reviews
@@ -76,6 +77,7 @@ function ReviewList({ movieTitle, genreIds }: ReviewProps) {
                 ))
             : ''
         }
+        </div>
 
         {reviews && reviews.length > 10 && (
           <ReviewPageButtons
