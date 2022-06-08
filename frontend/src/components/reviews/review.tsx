@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ReviewProps} from "./reviewList";
+import {ReviewProps} from "./reviewSection";
 
 
 //A single review containing a username, star rating and the actual comment (review)

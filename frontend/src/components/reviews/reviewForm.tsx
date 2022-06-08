@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from "@apollo/client";
 import { addMovie, addReview} from "./../../queries/queries";
-import {ReviewProps} from "./reviewList";
+import {ReviewProps} from "./reviewSection";
 import UsernameForm from '../users/UsernameForm';
 import { GENRE_LIST } from '../../helper/genres';
 
@@ -30,14 +30,12 @@ function ReviewForm({movieTitle, movieId, genreIds, updateReviewArray}: Props)
 
     if (addReviewResult && !reviewAdded)
     {
-        console.log(addReviewResult);
         updateReviewArray(addReviewResult.addReview);
         setReviewAdded(true);
     }
 
     if (addMovieResult)
     {
-      console.log("add movie result", addMovieResult)
       if(addMovieResult.addMovie){
         prepareReviewForSending(addMovieResult.addMovie?.id);
       }
