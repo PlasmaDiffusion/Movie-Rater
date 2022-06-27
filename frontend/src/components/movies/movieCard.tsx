@@ -63,7 +63,7 @@ function MovieCard(props: MovieProps){
     }
 
 return(
-        <React.Fragment>
+        <>
             <div className="listedMovie" key={"movie" + props.id} onClick={openDetailsWindow} onTouchStart={preparePreviewOnHover} onMouseOver={preparePreviewOnHover} >
                 <div className="showOnHover" >
                     {loadedPreview && (<MovieReviewPreview movieName={props.movie.title} />)}
@@ -75,7 +75,7 @@ return(
             <div style={{display:movieSelected ? "block" : "none"}} key={"movieDetails" + props.id}>
                    <MovieDetails movie={props.movie} closeOnClick={closeDetailsWindow} />
             </div>}
-        </React.Fragment>
+        </>
         );
 
 }

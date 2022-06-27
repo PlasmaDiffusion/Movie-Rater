@@ -79,20 +79,20 @@ const RootQuery = new GraphQLObjectType({
             resolve(parent, args){
                 console.log("Getting ", args.name);
                 return Movie.findOne({name: args.name});
-                let movie = Movie.findOne({name: args.name});
+                // let movie = Movie.findOne({name: args.name});
 
-                //Calculate average score of movie
-                let totalScore =0;
-                console.log(movie.reviews);
-                if (movie.reviews)
-                {
-                movie.reviews.forEach(review => {
-                    totalScore+= review.score;
-                });
-                movie.averageScore = totalScore / movie.reviews.length;
-                }
-                else {console.log("No reviews")}
-                console.log("Getting ", movie.name, " arg:", args.name);
+                // //Calculate average score of movie
+                // let totalScore =0;
+                // console.log(movie.reviews);
+                // if (movie.reviews)
+                // {
+                // movie.reviews.forEach(review => {
+                //     totalScore+= review.score;
+                // });
+                // movie.averageScore = totalScore / movie.reviews.length;
+                // }
+                // else {console.log("No reviews")}
+                // console.log("Getting ", movie.name, " arg:", args.name);
             }
         },
         user: {

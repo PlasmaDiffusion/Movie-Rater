@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MovieCard from './movieCard';
 import "./movie.scss"
@@ -21,6 +21,7 @@ function MovieList(props: ListProps){
         axios.get("https://api.themoviedb.org/3/list/" + props.id + "?api_key=cedfb13c7a702ab65870f31a8b84ae6b")
         .then(res => {
           setMovieArray(res.data.items);
+          console.log(res.data.items);
           //setListDescription(res.data.description);
 
         })}, []);
@@ -35,6 +36,7 @@ function MovieList(props: ListProps){
           setRefs(refs);
         }
 
+      // Unused code for scroll arrow buttons to scroll through the list by x number of movies
       function onClickScroll(e: any){
 
         setScrollTarget(scrollTarget+1);
