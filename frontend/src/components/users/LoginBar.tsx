@@ -15,10 +15,17 @@ const LoginBar = () => {
   }
 
   return (
-    <div onMouseOver={()=>{setButtonPopOut(true);}} onMouseOut={()=>{setButtonPopOut(false);}}>
+    <div
+      onMouseOver={() => {
+        setButtonPopOut(true);
+      }}
+      onMouseOut={() => {
+        setButtonPopOut(false);
+      }}
+    >
       <>
         <div className="navGrid">
-          <p className="user" style={{zIndex: buttonPopOut ? 1 : 0}}>
+          <p className="user" style={{ zIndex: buttonPopOut ? 1 : 0 }}>
             {isAuthenticated && user ? (
               <>
                 <LogoutButton />
