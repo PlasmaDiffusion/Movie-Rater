@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import LoginBar from './components/users/LoginBar';
 import MovieList from './components/movies/movieList';
 import './app.scss';
+import MovieSearchBar from './components/movies/search/movieSearchBar';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <>
           <LoginBar />
         </>
+        <MovieSearchBar />
       </header>
 
       <div>
