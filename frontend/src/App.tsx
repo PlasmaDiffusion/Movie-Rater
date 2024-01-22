@@ -4,6 +4,7 @@ import LoginBar from './components/users/LoginBar';
 import MovieList from './components/movies/movieList';
 import './app.scss';
 import MovieSearchBar from './components/movies/search/movieSearchBar';
+import SearchResults from './components/movies/search/searchResults';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       </header>
 
       <div>
+        <SearchResults />
         <MovieList id={1} category={'Marvel'} />
         <MovieList id={3} category={'DC'} />
         <MovieList id={10} category={'Top Grossing Films (as of 2012)'} />

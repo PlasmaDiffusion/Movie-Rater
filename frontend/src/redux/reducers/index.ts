@@ -1,10 +1,9 @@
-import { searchResults } from "../actions";
-import postedReducer from "./counter";
+import {postedReducer, searchResultsReducer} from "./counter";
 import { combineReducers } from "redux";
 
 const allReducers = combineReducers({
     posted: postedReducer,
-    searchResults: searchResults,
+    searchResults: searchResultsReducer,
 });
 
 export default allReducers;

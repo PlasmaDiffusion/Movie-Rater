@@ -5,6 +5,10 @@ export const posted = (value : boolean) => {
 };
 
 export const searchResults = (value : MovieProps[]) => {
-    return { type: "searchResults", payload: value };
+    return { type: "SEARCH_RESULTS", payload: value };
+};
+
+export const toggleSearchResultVisibility = () => {
+    return { type: "TOGGLE_SEARCH_VISIBILITY" };
 };
 

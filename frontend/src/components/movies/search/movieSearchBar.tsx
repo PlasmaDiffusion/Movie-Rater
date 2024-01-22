@@ -1,9 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { searchResults } from '../../../redux/actions';
+import { MovieProps } from '../movieCard';
 
 function MovieSearchBar() {
   const [inputText, setInputText] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (searchQuery) {
@@ -14,9 +18,12 @@ function MovieSearchBar() {
         .then((res) => {
           console.log(res);
           console.log(res.data.results);
+          const resultingArray: MovieProps[]  = res.data.results;
+          console.log(resultingArray);
+          dispatch(searchResults(res.data.results));
         });
     }
-  }, [searchQuery]);
+  }, [dispatch, searchQuery]);
 
   return (
     <React.Fragment>
