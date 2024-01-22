@@ -7,17 +7,14 @@ export const postedReducer = (state = 0, action: any) => {
   }
 };
 
-const initialSearchState = {
-results: [],
-isVisible: false,
-}
 
-export const searchResultsReducer = (state = initialSearchState, action: any) => {
+export const searchResultsReducer = (state = [], action: any) => {
   switch (action.type) {
-    case 'SEARCH_RESULTS':
+    case 'SET_SEARCH_RESULTS':
       return action.payload;
-    case 'TOGGLE_SEARCH_VISIBILITY':
-      return !state.isVisible;
+    case 'CLEAR_SEARCH':
+      state = [];
+      return state;
     default:
       return state;
   }

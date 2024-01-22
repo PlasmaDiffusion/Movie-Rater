@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { searchResults } from '../../../redux/actions';
+import { setSearchResults, clearSearch } from '../../../redux/actions';
 import { MovieProps } from '../movieCard';
 
 function MovieSearchBar() {
@@ -20,8 +20,11 @@ function MovieSearchBar() {
           console.log(res.data.results);
           const resultingArray: MovieProps[]  = res.data.results;
           console.log(resultingArray);
-          dispatch(searchResults(res.data.results));
+          dispatch(setSearchResults(res.data.results));
         });
+    }
+    else {
+      dispatch(clearSearch());
     }
   }, [dispatch, searchQuery]);
 

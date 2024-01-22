@@ -4,11 +4,11 @@ export const posted = (value : boolean) => {
     return { type: "POSTED", payload: value };
 };
 
-export const searchResults = (value : MovieProps[]) => {
-    return { type: "SEARCH_RESULTS", payload: value };
+export const setSearchResults = (value : MovieProps[]) => {
+    return { type: "SET_SEARCH_RESULTS", payload: value };
 };
 
-export const toggleSearchResultVisibility = () => {
-    return { type: "TOGGLE_SEARCH_VISIBILITY" };
+export const clearSearch = () => {
+    return { type: "CLEAR_SEARCH" };
 };
 
