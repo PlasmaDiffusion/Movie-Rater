@@ -50,8 +50,6 @@ function ReviewForm({movieTitle, movieId, genreIds, updateReviewArray}: Props)
     {
       let genre : string = "";
       if (genreIds) genre = GENRE_LIST[genreIds[0]];
-
-      console.log("About to add ", movieTitle, genre);
       
       await addMovieMutation({variables:{name:movieTitle, genre:genre}});
     }

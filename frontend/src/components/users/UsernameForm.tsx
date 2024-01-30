@@ -20,11 +20,9 @@ function UsernameForm({ updateUser }: Props) {
   const [addUserMutation, { data: addResult }] = useMutation(addUser);
 
   if (data) {
-    console.log('user data: ', data);
     if (data.user !== null) updateUser(data.user.username, data.user.id);
   }
   if (addResult) {
-    console.log('result: ', addResult);
     if (addResult.addUser !== null) updateUser(addResult.addUser.username, addResult.addUser.id);
   }
 

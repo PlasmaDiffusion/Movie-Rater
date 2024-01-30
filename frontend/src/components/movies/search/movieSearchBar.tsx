@@ -16,10 +16,6 @@ function MovieSearchBar() {
           `https://api.themoviedb.org/3/search/movie?query=${searchQuery}&api_key=cedfb13c7a702ab65870f31a8b84ae6b`
         )
         .then((res) => {
-          console.log(res);
-          console.log(res.data.results);
-          const resultingArray: MovieProps[]  = res.data.results;
-          console.log(resultingArray);
           dispatch(setSearchResults(res.data.results));
         });
     }

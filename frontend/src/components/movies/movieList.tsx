@@ -35,10 +35,8 @@ function MovieList(props: ListProps) {
 
   function onClickScroll(e: any) {
     setScrollTarget(scrollTarget + 1);
-    console.log(scrollTarget);
 
     if (refs[scrollTarget]) {
-      console.log(refs[scrollTarget]);
       refs[scrollTarget].focus();
       refs[scrollTarget].current.scrollIntoView({
         behavior: 'smooth',

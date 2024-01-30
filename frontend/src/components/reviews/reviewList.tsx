@@ -1,21 +1,19 @@
-import React, { useState } from "react";
-import Review from "./review";
-import ReviewPageButtons from "./reviewPageButtons";
+import React, { useState } from 'react';
+import Review from './review';
+import ReviewPageButtons from './reviewPageButtons';
 
-interface Props  {
-    aveScore: number;
-    movieTitle: string;
-    reviews: any[];
+interface Props {
+  aveScore: number;
+  movieTitle: string;
+  reviews: any[];
 }
 
-function ReviewList({aveScore, movieTitle, reviews} : Props) {
-
-    const [reviewPage, setReviewPage] = useState(0);
-
+function ReviewList({ aveScore, movieTitle, reviews }: Props) {
+  const [reviewPage, setReviewPage] = useState(0);
 
   return (
     <>
-      <h2>Average Score: {aveScore}</h2>
+      <h2>Average Score : {aveScore}</h2>
       <div className="reviewPage">
         <div className={reviews.length > 10 ? 'trimmedReviewList' : ''}>
           {

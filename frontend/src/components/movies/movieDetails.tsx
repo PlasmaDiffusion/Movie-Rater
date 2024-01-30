@@ -24,7 +24,7 @@ function MovieDetails(props: MovieProps){
           <p>{props.movie.overview}</p>
         </div>
         
-        {visible && <ReviewSection movieTitle={props.movie.title} genreIds={props.movie.genre_ids}/>} 
+        {visible && <ReviewSection movieTitle={props.movie.title} genreIds={props.movie.genre_ids} averageScoreOnTheMovieDB={props.movie.vote_average} votesOnTheMovieDB={props.movie.vote_count}/>} 
       </div>
     );
 }

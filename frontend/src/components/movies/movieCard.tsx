@@ -13,6 +13,8 @@ export interface MovieProps {
     genre_ids: number[];
     release_date: string;
     overview: string;
+    vote_average: number; //Only The Movie DB API's average, not this website
+    vote_count: number; //Votes total on The Movie DB
   };
   closeOnClick?: () => void;
   ref?: any;
@@ -26,7 +28,6 @@ function MovieCard(props: MovieProps) {
 
   const postedReview = useSelector((state: any) => state.posted);
   const dispatch = useDispatch();
-  console.log(postedReview);
 
   function openDetailsWindow() {
     setMovieSelected(true);
@@ -63,7 +64,7 @@ function MovieCard(props: MovieProps) {
         onMouseOver={preparePreviewOnHover}
       >
         <div className="showOnHover">
-          {loadedPreview && <MovieReviewPreview movieName={props.movie.title} />}
+          {loadedPreview && <MovieReviewPreview movieName={props.movie.title} averageScoreOnTheMovieDB={props.movie.vote_average} votesOnTheMovieDB={props.movie.vote_count} />}
         </div>
         <img
           src={'https://image.tmdb.org/t/p/original/' + props.movie.poster_path}

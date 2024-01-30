@@ -20,10 +20,18 @@ export interface ReviewProps {
       username: string;
     };
   };
+
+  averageScoreOnTheMovieDB?: number;
+  votesOnTheMovieDB?: number;
 }
 
 //Get all reviews for the particular movie, and list them. Also have a form to submit a review at the bottom.
-function ReviewSection({ movieTitle, genreIds }: ReviewProps) {
+function ReviewSection({
+  movieTitle,
+  genreIds,
+  averageScoreOnTheMovieDB,
+  votesOnTheMovieDB,
+}: ReviewProps) {
   const [reviews, setReviews] = useState<any[]>([]);
   const [aveScore, setAveScore] = useState(0);
   const [movieId, setMovieId] = useState<string>('');
@@ -41,7 +49,6 @@ function ReviewSection({ movieTitle, genreIds }: ReviewProps) {
   if (data && !reviewsLoaded && !creatingMovie) {
     if (data.movie) {
       setReviews(data.movie.reviews);
-      console.log(data.movie.reviews);
       if (data.movie.reviews.length > 0) setAveScore(getAverageScore(data.movie));
       setMovieId(data.movie.id);
     }
@@ -63,23 +70,33 @@ function ReviewSection({ movieTitle, genreIds }: ReviewProps) {
 
   return (
     <div>
-
-        <ReviewList aveScore={aveScore} reviews={reviews} movieTitle={movieTitle ? movieTitle : ""} />
-
-        <p style={{ textAlign: 'center' }}>{!reviewsLoaded ? '' : ''}</p>
-        <p style={{ textAlign: 'center' }}>
-          {
-            //Mention if there aren't any reviews for this movie yet after an attempt was made to get them.
-            reviews.length === 0 && reviewsLoaded ? 'No reviews yet for this movie.' : ''
-          }
+      <div className="theMovieDB">
+        <u>Rating On The Movie DB</u>
+        <p>
+          <i>Average On The Movie DB:</i> {averageScoreOnTheMovieDB} / 10{' '}
         </p>
-
-        <br></br>
-        <br></br>
-        {!reviewWasPosted && (
-          <ReviewForm movieTitle={movieTitle} movieId={movieId} updateReviewArray={addReview} />
-        )}
+        <p>
+          <i>Votes On The Movie DB:</i> {votesOnTheMovieDB}{' '}
+        </p>
       </div>
+
+      <u>Rating On This Site</u>
+      <ReviewList aveScore={aveScore} reviews={reviews} movieTitle={movieTitle ? movieTitle : ''} />
+
+      <p style={{ textAlign: 'center' }}>{!reviewsLoaded ? '' : ''}</p>
+      <p style={{ textAlign: 'center' }}>
+        {
+          //Mention if there aren't any reviews for this movie yet after an attempt was made to get them.
+          reviews.length === 0 && reviewsLoaded ? 'No reviews yet for this movie.' : ''
+        }
+      </p>
+
+      <br></br>
+      <br></br>
+      {!reviewWasPosted && (
+        <ReviewForm movieTitle={movieTitle} movieId={movieId} updateReviewArray={addReview} />
+      )}
+    </div>
   );
 }
 
