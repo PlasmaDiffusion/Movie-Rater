@@ -18,8 +18,7 @@ function MovieSearchBar() {
         .then((res) => {
           dispatch(setSearchResults(res.data.results));
         });
-    }
-    else {
+    } else {
       dispatch(clearSearch());
     }
   }, [dispatch, searchQuery]);
@@ -29,6 +28,7 @@ function MovieSearchBar() {
       <input
         onChange={(e) => {
           setInputText(e.currentTarget.value);
+          setSearchQuery(e.currentTarget.value);
         }}
       ></input>
       <button
